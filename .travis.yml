@@ -6,6 +6,6 @@ deploy:
   provider: heroku
   api_key: 
     secure: YfTEFOxZ9eUbgYluWgahiaU1ctOJ7mGRDivMlT+X1ZbEFNPLSvfslr/ykO7q9FHUb15FRLA81laHqkLcV9KxWhhdDxAy4//3tQtpE27Cdn6tpHdYpmPbOz3x6bL6cB5fNFlFjYbQEOKBKnyWYSiCdI3ax3IQPYQ1OWcfUf221PDMlmZV5VPWMrXriq1Mbeq+/4/v+q9b1fK40T5s0ugPBXtzn59fJqXuowjDiQMe01VqeJkqKc64pjxSwkbbsJBJRM7G4ZJ/Bzc+R0W7lCVIgfw3ZWtafRbi8QvciZziFCyldA4E2cIEnVlx4d39UiWtiw5ZI0qXwA9yy1CrbQr2m2Szw1+kw4FZd89405ic5+gulm8/YkduwGxPoXkB24Az3eluKRGVlb0OeffmC4FnDrCQxhQqFu8saibrtUaD0Sa+J+2i4vCLrlq7pDA0KOxPNOTvqTid5OMLNdWh9xw/prGXiVy4SPv1n2rh/Jy3bkSqiqaAkBURXV2bqGcz+LnS34sGJApwhTN1GW2CBIkUptvF9eOpPcEjEKqVVGKrtrubGQ8RAUYuGfbyctzH7kdjPAdN2Wba2N5WlwU1ECv/9sCcGr/gAfgH4PCGu/81mcisxCOuozEAZA1ZdtcjVWmlpaa40ontutzRU6KB6A9yKcIZsOd9l0+++IGLeKq0V5E=
-  app: Moon-Minded
+  app: moon-minded
   on:
     repo: alimac2/Moon-Minded
