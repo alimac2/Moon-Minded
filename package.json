@@ -1,0 +1,14 @@
+{
+  "name": "capstone-2",
+  "version": "1.0.0",
+  "description": "Thinkful Node Capstone",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Camila Salvador",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
