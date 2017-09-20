@@ -15,6 +15,7 @@ describe('verifications', ()=> {
     return chai.request(app).get('/') //promise
         .then((res)=> {
          res.should.have.status(200);
+         res.should.be.html
         });
     })
 });
