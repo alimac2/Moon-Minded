@@ -14,7 +14,8 @@ const {app} = require('../server');
 
 describe('verifications', ()=> {
     it('should render html', ()=> {
-    return chai.request(app).get('/') //promise
+    return chai.request(app) /*promise*/
+        .get('/') 
         .then((res)=> {
          res.should.have.status(200);
          res.should.be.html
