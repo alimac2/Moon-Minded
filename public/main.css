@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+nav {
+	height: 60px;
+	position: relative;
+}
+
+h1 {
+    font-family: 'Montserrat Subrayada', sans-serif;
+}
