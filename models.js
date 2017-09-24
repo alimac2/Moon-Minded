@@ -8,6 +8,6 @@ const entrySchema = mongoose.Schema ({
     content: {type: String}, 
 });
 
-const Entry = mongoose.model('Entry', entrySchema);
+const Entry = mongoose.model("Entry", entrySchema);
 
 module.exports = {Entry};
