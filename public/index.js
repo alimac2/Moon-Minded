@@ -28,8 +28,7 @@ function getEntries(callbackFn) {
 function displayEntries(data) {
     for (index in data.journalEntries) {
         $("body").append(
-            "<p>" + data.journalEntries[index].text + "</p>");
-        console.log(index);    
+            "<p>" + data.journalEntries[index].content + "</p>");  
         }
 }
 
