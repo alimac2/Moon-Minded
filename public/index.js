@@ -29,7 +29,8 @@ function displayEntries(data) {
     for (index in data.journalEntries) {
         $("body").append(
             "<p>" + data.journalEntries[index].text + "</p>");
-    }
+        console.log(index);    
+        }
 }
 
 function getAndDisplayEntries() {
