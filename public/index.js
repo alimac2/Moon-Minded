@@ -22,7 +22,7 @@ const MOCK_ENTRY = {
 };
 
 function getEntries(callbackFn) {
-    
+    setTimeout(function() { callbackFn(MOCK_ENTRY)}, 100);
 }
 
 function displayEntries(data) {
