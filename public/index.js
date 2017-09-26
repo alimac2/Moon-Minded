@@ -22,7 +22,13 @@ const MOCK_ENTRY = {
 };
 
 function getEntries(callbackFn) {
-    setTimeout(function() { callbackFn(MOCK_ENTRY)}, 100);
+    $.ajax({
+        method: "GET",
+        url: ENTRIES, /* fill in with valid url */
+        dataType: "json",
+        success: success, /*function with data as param*/
+        contentType: 
+    });
 }
 
 function displayEntries(data) {
