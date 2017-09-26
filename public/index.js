@@ -4,19 +4,22 @@ const MOCK_ENTRY = {
             "id": "1111",
             "title": "Milky Way at the Beach",
             "eventType": "milky way",
-            "content": "On a drive up to the beach with my sisters we saw the most brilliant night sky. The stars blanketed the entire sky and the milky way was so vivid."
+            "content": "On a drive up to the beach with my sisters we saw the most brilliant night sky. The stars blanketed the entire sky and the milky way was so vivid.",
+            "created": "September 10, 2017"
         },
         {
             "id": "2222",
             "title": "First Solar Eclipse",
             "eventType": "solar eclipse",
-            "content": "Viewing the eclipse was one of the most spectacular natural phenomenons I have ever witnessed. I get goosebumps just thinking about it. It was so brief yet so memorable. The thrill I felt while watching it is hard to explain."
+            "content": "Viewing the eclipse was one of the most spectacular natural phenomenons I have ever witnessed. I get goosebumps just thinking about it. It was so brief yet so memorable. The thrill I felt while watching it is hard to explain.",
+            "created": "August 3, 2017"
         },
         {
             "id": "3333",
             "title": "Falling Sky",
             "eventType": "meteor shower",
-            "content": "Have you ever looked at the night sky and thought to yourself, 'Shit, the starts are falling'? Tonight that's exactly what went through my mind. The number of meteors crossing the sky at one time was unbelievable. I was mesmerized."
+            "content": "Have you ever looked at the night sky and thought to yourself, 'Shit, the starts are falling'? Tonight that's exactly what went through my mind. The number of meteors crossing the sky at one time was unbelievable. I was mesmerized.",
+            "created": "February 22, 2017"
         }
     ]
 };
@@ -26,10 +29,21 @@ function getEntries(callbackFn) {
         method: "GET",
         url: ENTRIES, /* fill in with valid url */
         dataType: "json",
-        success: success, /*function with data as param*/
+        success: function(data) {},
         contentType: 
     });
 }
+
+function updateEntries(callbackFn) {
+    $.ajax({
+        method: "PUT",
+        url: ENTRIES, /* rework*/
+        data: data,
+        success: function(data) {},
+    });
+}
+
+
 
 function displayEntries(data) {
     for (index in data.journalEntries) {
