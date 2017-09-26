@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 const {app} = require("../server");
 
 
-
+/* refactor */
 describe("verifications", ()=> {
     it("should render html", ()=> {
     return chai.request(app) /*promise*/
@@ -20,7 +20,29 @@ describe("verifications", ()=> {
          res.should.have.status(200);
          res.should.be.html
         });
-    })
-});
+    });
+})
+
+describe("GET endpoint", function(){
+    it("should return all existing entries", function() {
+        let res;
+        return chai.request(app)
+        .get("/entries") /*type in valid route*/
+        .then(function(_res) {
+            res = _res;
+            res.should.have.status(200);
+            res.body.entries.should.have.length.of.at.least(1);
+            return Entry.count();
+        })
+        .then(function(count) {
+            res.body.entries.should.have.length.of(count);
+        });
+    });
+})
+
+
+
+
+
 
     
