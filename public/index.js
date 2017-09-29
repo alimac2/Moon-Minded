@@ -43,8 +43,6 @@ function updateEntries(callbackFn) {
     });
 }
 
-
-
 function displayEntries(data) {
     for (index in data.journalEntries) {
         $("body").append(
