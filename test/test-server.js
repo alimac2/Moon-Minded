@@ -87,12 +87,12 @@ after(function() {
 
 
 
-describe("GET endpoint", function(){
+describe("GET endpoint", function() {
     it("should return all existing entries", function() {
         let res;
         return chai.request(app)
-        .get("/entries") /*type in valid route*/
-        .then(function(_res) {
+          .get("/entries") /*type in valid route*/
+          .then(function(_res) {
             res = _res;
             res.should.have.status(200);
             res.body.entries.should.have.length.of.at.least(1);
@@ -104,50 +104,139 @@ describe("GET endpoint", function(){
     });
 })
 
+it('should return entries with right fields', function() {
+  // Strategy: Get back all restaurants, and ensure they have expected keys
 
-const updateData = {
-    title: "The Moon and the Stars",
-    eventType: "milky way"
-  };
-  
-  return Entry
-    .findOne()
-    .then(function(entry) {
-      updateData.id = entry.id;
-  
-      // make request then inspect it to make sure it reflects
-      // data we sent
-      return chai.request(app)
-        .put(`/entries/${entry.id}`)
-        .send(updateData);
-    })
+  let resRestaurant;
+  return chai.request(app)
+    .get('/entries')
     .then(function(res) {
-      res.should.have.status(204);
-  
-      return Entry.findById(updateData.id);
-    })
-    .then(function(entry) {
-      entry.title.should.equal(updateData.title);
-      entry.eventType.should.equal(updateData.eventType);
-    });
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.restaurants.should.be.a('array');
+      res.body.restaurants.should.have.length.of.at.least(1);
 
-    
-    
-    let entry;
-    
-    Entry
+      res.body.restaurants.forEach(function(entry) {
+        restaurant.should.be.a('object');
+        restaurant.should.include.keys(
+          'id', 'title', 'eventType', 'content', 'created');
+      });
+      resEntry = res.body.entries[0]; /* res.body[0] ??*/
+      return Entry.findById(resEntry.id);
+    })
+    .then(function(restaurant) {
+
+      resRestaurant.id.should.equal(restaurant.id);
+      resRestaurant.title.should.equal(restaurant.title);
+      resRestaurant.eventType.should.equal(restaurant.eventType);
+      resRestaurant.content.should.equal(restaurant.content);
+      resRestaurant.created.should.contain(restaurant.created);
+    });
+  });
+});
+
+
+describe('POST endpoint', function() {
+  // strategy: make a POST request with data,
+  // then prove that the restaurant we get back has
+  // right keys, and that `id` is there (which means
+  // the data was inserted into db)
+  it('should add a new restaurant', function() {
+
+    const newEntry = generateEntryData();
+
+    return chai.request(app)
+      .post('/entries') /*should this be different?*/
+      .send(newEntry)
+      .then(function(res) {
+        res.should.have.status(201);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.include.keys(
+          'id', 'title', 'eventType', 'content', 'created');
+       
+        // cause Mongo should have created id on insertion
+        res.body.id.should.not.be.null;
+        res.body.title.should.equal(newEntry.title);
+        res.body.eventType.should.equal(newRestaurant.eventType);
+        res.body.content.should.equal(newEntry.content);
+        res.body.created.should.equal(newEntry.created);
+
+        return Restaurant.findById(res.body.id);
+      })
+      .then(function(dream) {
+        entry.title.should.equal(newEntry.title);
+        entry.eventType.should.equal(newEntry.eventType);
+        entry.content.should.equal(newEntry.content);
+        entry.created.should.equal(newEntry.created);
+      });
+  });
+});
+
+
+
+describe('PUT endpoint', function() {
+  // strategy:
+  //  1. Get an existing dream from db
+  //  2. Make a PUT request to update that dreamt
+  //  3. Prove dream returned by request contains data we sent
+  //  4. Prove dream in db is correctly updated
+  it('should update fields you send over', function() {
+    const updateData = {
+      title: "The Moon and the Stars",
+      eventType: "milky way"
+    };
+  
+    return Entry
       .findOne()
-      .then(function(_entry) {
-        entry = _entry;
-        return chai.request(app).delete(`/entries/${entry.id}`);
+      .then(function(entry) {
+        updateData.id = entry.id;
+    
+        // make request then inspect it to make sure it reflects
+        // data we sent
+        return chai.request(app)
+          .put(`/entries/${entry.id}/json`)
+          .send(updateData);
       })
       .then(function(res) {
         res.should.have.status(204);
-        return Entry.findById(entry.id);
-      })
-      .then(function(_entry) {
-        should.not.exist(_entry);
-      });
-
-
     
+        return Entry.findById(updateData.id);
+      })
+      .then(function(entry) {
+        entry.title.should.equal(updateData.title);
+        entry.eventType.should.equal(updateData.eventType);
+      });
+    });
+  });
+
+
+  describe('DELETE endpoint', function() {
+    // strategy:
+    //  1. get a restaurant
+    //  2. make a DELETE request for that restaurant's id
+    //  3. assert that response has right status code
+    //  4. prove that restaurant with the id doesn't exist in db anymore
+    it('delete an entry by id', function() {
+
+      let entry;
+
+      return Entry
+        .findOne()
+        .then(function(_entry) {
+          entry = _entry;
+          return chai.request(app).delete(`/entires/${restaurant.id}/json`);
+        })
+        .then(function(res) {
+          res.should.have.status(204);
+          return Entry.findById(entry.id);
+        })
+        .then(function(_entry) {
+          // when a variable's value is null, chaining `should`
+          // doesn't work. so `_restaurant.should.be.null` would raise
+          // an error. `should.be.null(_restaurant)` is how we can
+          // make assertions about a null value.
+          should.not.exist(_entry);
+        });
+    });
+  });
