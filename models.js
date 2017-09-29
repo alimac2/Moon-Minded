@@ -23,7 +23,6 @@ blogPostSchema.methods.apiRepr = function() {
     }; 
 }
 
-
 const Entry = mongoose.model("Entry", entrySchema);
 
 module.exports = {Entry};
