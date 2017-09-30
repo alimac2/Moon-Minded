@@ -77,6 +77,7 @@ before(function() {
 
 beforeEach(function() {
   return seedEntryData();
+  console.log(seedEntryData);
 });
 
 afterEach(function() {
@@ -146,8 +147,8 @@ describe('POST endpoint', function() {
   it('should add a new entry', function() {
 
     const newEntry = generateEntryData();
-
-    return chai.request(app)
+    console.log(newEntry);
+    return chai.request(app) /*will return a promise*/
       .post('/entries') /*should this be different?*/
       .send(newEntry)
       .then(function(res) {
