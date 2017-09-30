@@ -43,7 +43,7 @@ function generateEntryEventType() {
 function generateEntryData() {
   return {
     title: faker.lorem.sentence(),
-    eventType: faker.lorem.word(),
+    eventType: generateEntryEventType(),
     content: faker.lorem.paragraph(),
     created: faker.date.recent()
   }
