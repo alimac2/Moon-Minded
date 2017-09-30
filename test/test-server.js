@@ -56,8 +56,12 @@ function generateEntryData() {
 // to ensure  ata from one test does not stick
 // around for next one
 function tearDownDb() {
-  console.warn('Deleting database');
-  return mongoose.connection.dropDatabase();
+  return new Promise((resolve, reject) => {
+    console.warn('Deleting database');
+    mongoose.connection.dropDatabase()
+      .then(result => resolve(result))
+      .catch(err => reject(err))
+  });
 }
 /*should I add more to this?*/
 
