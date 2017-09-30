@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
 
-const {DATABASE_URL, PORT} = require("./config");  /* maybe need to rework because unsure */
+const {DATABASE_URL, PORT} = require("./config");
 const {Entry} = require("./models");
 
 const app = express();
