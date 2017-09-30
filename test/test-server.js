@@ -9,9 +9,6 @@ var should = chai.should();
 
 chai.use(chaiHttp);
 
-const {app} = require("../server");
-
-
 const {Entry} = require('../models');
 const {app, runServer, closeServer} = require('../server');
 const {DATABASE_URL} = require('../config');
@@ -46,9 +43,9 @@ function generateEntryEventType() {
 function generateEntryData() {
   return {
     title: faker.lorem.sentence(),
-    eventType: generateEntryEventType(),
+    eventType: faker.lorem.word(),
     content: faker.lorem.paragraph(),
-    created: faker.date_time.date() /* double check this is correct from faker library */
+    created: faker.date.recent()
   }
 }
 
