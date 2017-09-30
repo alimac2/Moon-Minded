@@ -37,7 +37,7 @@ function generateEntryEventType() {
   return type[Math.floor(Math.random() * type.length)];
 }
 
-// generate an object represnting a restaurant.
+// generate an object represnting a entry.
 // can be used to generate seed data for db
 // or request.body data
 function generateEntryData() {
@@ -64,14 +64,14 @@ describe('Entries API resource', function() {
 
 // we need each of these hook functions to return a promise
 // otherwise we'd need to call a `done` callback. `runServer`,
-// `seedRestaurantData` and `tearDownDb` each return a promise,
+// `seedEntryData` and `tearDownDb` each return a promise,
 // so we return the value returned by these function calls.
 before(function() {
   return runServer(); /*or (TEST_DATABASE_URL)*/
 });
 
 beforeEach(function() {
-  return seedRestaurantData();
+  return seedEntryData();
 });
 
 afterEach(function() {
@@ -102,32 +102,32 @@ describe("GET endpoint", function() {
 })
 
 it('should return entries with right fields', function() {
-  // Strategy: Get back all restaurants, and ensure they have expected keys
+  // Strategy: Get back all entries, and ensure they have expected keys
 
-  let resRestaurant;
+  let resEntry;
   return chai.request(app)
     .get('/entries')
     .then(function(res) {
       res.should.have.status(200);
       res.should.be.json;
-      res.body.restaurants.should.be.a('array');
-      res.body.restaurants.should.have.length.of.at.least(1);
+      res.body.entries.should.be.a('array');
+      res.body.entries.should.have.length.of.at.least(1);
 
-      res.body.restaurants.forEach(function(entry) {
-        restaurant.should.be.a('object');
-        restaurant.should.include.keys(
+      res.body.entries.forEach(function(entry) {
+        entry.should.be.a('object');
+        entry.should.include.keys(
           'id', 'title', 'eventType', 'content', 'created');
       });
       resEntry = res.body.entries[0]; /* res.body[0] ??*/
       return Entry.findById(resEntry.id);
     })
-    .then(function(restaurant) {
+    .then(function(entry) {
 
-      resRestaurant.id.should.equal(restaurant.id);
-      resRestaurant.title.should.equal(restaurant.title);
-      resRestaurant.eventType.should.equal(restaurant.eventType);
-      resRestaurant.content.should.equal(restaurant.content);
-      resRestaurant.created.should.contain(restaurant.created);
+      resEntry.id.should.equal(entry.id);
+      resEntry.title.should.equal(entry.title);
+      resEntry.eventType.should.equal(entry.eventType);
+      resEntry.content.should.equal(entry.content);
+      resEntry.created.should.contain(entry.created);
     });
   });
 });
@@ -135,10 +135,10 @@ it('should return entries with right fields', function() {
 
 describe('POST endpoint', function() {
   // strategy: make a POST request with data,
-  // then prove that the restaurant we get back has
+  // then prove that the entry we get back has
   // right keys, and that `id` is there (which means
   // the data was inserted into db)
-  it('should add a new restaurant', function() {
+  it('should add a new entry', function() {
 
     const newEntry = generateEntryData();
 
@@ -155,11 +155,11 @@ describe('POST endpoint', function() {
         // cause Mongo should have created id on insertion
         res.body.id.should.not.be.null;
         res.body.title.should.equal(newEntry.title);
-        res.body.eventType.should.equal(newRestaurant.eventType);
+        res.body.eventType.should.equal(newEntry.eventType);
         res.body.content.should.equal(newEntry.content);
         res.body.created.should.equal(newEntry.created);
 
-        return Restaurant.findById(res.body.id);
+        return Entry.findById(res.body.id);
       })
       .then(function(dream) {
         entry.title.should.equal(newEntry.title);
@@ -210,10 +210,10 @@ describe('PUT endpoint', function() {
 
   describe('DELETE endpoint', function() {
     // strategy:
-    //  1. get a restaurant
-    //  2. make a DELETE request for that restaurant's id
+    //  1. get an entry
+    //  2. make a DELETE request for that entry's id
     //  3. assert that response has right status code
-    //  4. prove that restaurant with the id doesn't exist in db anymore
+    //  4. prove that entry with the id doesn't exist in db anymore
     it('delete an entry by id', function() {
 
       let entry;
@@ -222,7 +222,7 @@ describe('PUT endpoint', function() {
         .findOne()
         .then(function(_entry) {
           entry = _entry;
-          return chai.request(app).delete(`/entires/${restaurant.id}/json`);
+          return chai.request(app).delete(`/entires/${entry.id}/json`);
         })
         .then(function(res) {
           res.should.have.status(204);
@@ -230,8 +230,8 @@ describe('PUT endpoint', function() {
         })
         .then(function(_entry) {
           // when a variable's value is null, chaining `should`
-          // doesn't work. so `_restaurant.should.be.null` would raise
-          // an error. `should.be.null(_restaurant)` is how we can
+          // doesn't work. so `_entry.should.be.null` would raise
+          // an error. `should.be.null(_entry)` is how we can
           // make assertions about a null value.
           should.not.exist(_entry);
         });
