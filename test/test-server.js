@@ -12,6 +12,7 @@ chai.use(chaiHttp);
 const {Entry} = require('../models');
 const {app, runServer, closeServer} = require('../server');
 const {DATABASE_URL} = require('../config');
+const {TEST_DATABASE_URL} = require('../config');
 
 
 // used to put randomish documents in db
@@ -67,7 +68,7 @@ describe('Entries API resource', function() {
 // `seedEntryData` and `tearDownDb` each return a promise,
 // so we return the value returned by these function calls.
 before(function() {
-  return runServer(); /*or (TEST_DATABASE_URL)*/
+  return runServer(TEST_DATABASE_URL); 
 });
 
 beforeEach(function() {
