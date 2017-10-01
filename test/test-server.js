@@ -1,19 +1,19 @@
 "use strict"
 
-var mocha = require("mocha");
-var mongoose = require("mongoose");
-var chai = require("chai");
-var chaiHttp = require("chai-http");
-const faker = require('faker');
+const mocha = require("mocha");
+const mongoose = require("mongoose");
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const faker = require("faker");
 
-var should = chai.should();
+const should = chai.should();
 
 chai.use(chaiHttp);
 
-const {Entry} = require('../models');
-const {app, runServer, closeServer} = require('../server');
-const {DATABASE_URL} = require('../config');
-const {TEST_DATABASE_URL} = require('../config');
+const {Entry} = require("../models");
+const {app, runServer, closeServer} = require("../server");
+const {DATABASE_URL} = require("../config");
+const {TEST_DATABASE_URL} = require("../config");
 
 
 // used to put randomish documents in db
@@ -22,7 +22,7 @@ const {TEST_DATABASE_URL} = require('../config');
 // generate placeholder values for author, title, content
 // and then we insert that data into mongo
 function seedEntryData() {
-  console.info('seeding entry data');
+  console.info("seeding entry data");
   const seedData = [];
 
   for (let i=1; i<=10; i++) {
@@ -58,7 +58,7 @@ function generateEntryData() {
 // around for next one
 function tearDownDb() {
   return new Promise((resolve, reject) => {
-    console.warn('Deleting database');
+    console.warn("Deleting database");
     mongoose.connection.dropDatabase()
       .then(result => resolve(result))
       .catch(err => reject(err))
@@ -66,7 +66,7 @@ function tearDownDb() {
 }
 /*should I add more to this?*/
 
-describe('Entries API resource', function() {
+describe("Entries API resource", function() {
 
 // we need each of these hook functions to return a promise
 // otherwise we'd need to call a `done` callback. `runServer`,
@@ -87,7 +87,7 @@ afterEach(function() {
 
 after(function() {
   return closeServer();
-})
+});
 
 
 
@@ -100,36 +100,36 @@ describe("GET endpoint", function() {
             res = _res;
             res.should.have.status(200);
             res.body.entries.should.have.length.of.at.least(1);
+            
             return Entry.count();
-        })
-        .then(function(count) {
+          })
+          .then(function(count) {
             res.body.entries.should.have.length.of(count);
-        });
+          });
     });
 })
 
-it('should return entries with right fields', function() {
+it("should return entries with right fields", function() {
   // Strategy: Get back all entries, and ensure they have expected keys
 
   let resEntry;
   return chai.request(app)
-    .get('/entries')
+    .get("/entries")
     .then(function(res) {
       res.should.have.status(200);
       res.should.be.json;
-      res.body.entries.should.be.a('array');
+      res.body.entries.should.be.a("array");
       res.body.entries.should.have.length.of.at.least(1);
 
       res.body.entries.forEach(function(entry) {
-        entry.should.be.a('object');
+        entry.should.be.a("object");
         entry.should.include.keys(
-          'id', 'title', 'eventType', 'content', 'created');
+          "id", "title", "eventType", "content", "created");
       });
       resEntry = res.body.entries[0]; /* res.body[0] ??*/
       return Entry.findById(resEntry.id);
     })
     .then(function(entry) {
-
       resEntry.id.should.equal(entry.id);
       resEntry.title.should.equal(entry.title);
       resEntry.eventType.should.equal(entry.eventType);
@@ -140,24 +140,24 @@ it('should return entries with right fields', function() {
 });
 
 
-describe('POST endpoint', function() {
+describe("POST endpoint", function() {
   // strategy: make a POST request with data,
   // then prove that the entry we get back has
   // right keys, and that `id` is there (which means
   // the data was inserted into db)
-  it('should add a new entry', function() {
+  it("should add a new entry", function() {
 
     const newEntry = generateEntryData();
     console.log(newEntry);
     return chai.request(app) /*will return a promise*/
-      .post('/entries') /*should this be different?*/
+      .post("/entries") /*should this be different?*/
       .send(newEntry)
       .then(function(res) {
         res.should.have.status(201);
         res.should.be.json;
-        res.body.should.be.a('object');
+        res.body.should.be.a("object");
         res.body.should.include.keys(
-          'id', 'title', 'eventType', 'content', 'created');
+          "id", "title", "eventType", "content", "created");
        
         // cause Mongo should have created id on insertion
         res.body.id.should.not.be.null;
@@ -179,13 +179,13 @@ describe('POST endpoint', function() {
 
 
 
-describe('PUT endpoint', function() {
+describe("PUT endpoint", function() {
   // strategy:
   //  1. Get an existing dream from db
   //  2. Make a PUT request to update that dreamt
   //  3. Prove dream returned by request contains data we sent
   //  4. Prove dream in db is correctly updated
-  it('should update fields you send over', function() {
+  it("should update fields you send over", function() {
     const updateData = {
       title: "The Moon and the Stars",
       eventType: "milky way"
@@ -199,7 +199,7 @@ describe('PUT endpoint', function() {
         // make request then inspect it to make sure it reflects
         // data we sent
         return chai.request(app)
-          .put(`/entries/${entry.id}/json`)
+          .put(`/entries/${entry.id}`)
           .send(updateData);
       })
       .then(function(res) {
@@ -215,13 +215,13 @@ describe('PUT endpoint', function() {
   });
 
 
-  describe('DELETE endpoint', function() {
+  describe("DELETE endpoint", function() {
     // strategy:
     //  1. get an entry
     //  2. make a DELETE request for that entry's id
     //  3. assert that response has right status code
     //  4. prove that entry with the id doesn't exist in db anymore
-    it('delete an entry by id', function() {
+    it("delete an entry by id", function() {
 
       let entry;
 
@@ -229,7 +229,7 @@ describe('PUT endpoint', function() {
         .findOne()
         .then(function(_entry) {
           entry = _entry;
-          return chai.request(app).delete(`/entires/${entry.id}/json`);
+          return chai.request(app).delete(`/entires/${entry.id}`); /* `/entires/${entry.id}/json` */
         })
         .then(function(res) {
           res.should.have.status(204);

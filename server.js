@@ -9,7 +9,7 @@ const {Entry} = require("./models");
 
 const app = express();
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 mongoose.Promise = global.Promise;
 
@@ -22,12 +22,12 @@ app.get("/entries", (req, res) => {
       })
       .catch(err => {
         console.error(err);
-        res.status(500).json({error: 'Internal server error'});
+        res.status(500).json({error: "Internal server error"});
       });
 });
 
 
-app.get('/entries/:id', (req, res) => {
+app.get("/entries/:id", (req, res) => {
     Entry
       .findById(req.params.id)
       .then(post => res.json(post.apiRepr()))
@@ -37,7 +37,7 @@ app.get('/entries/:id', (req, res) => {
       });
 });
 
-app.post('/entries', (req, res) => {
+app.post("/entries", (req, res) => {
     
     const requiredFields = ["title", "eventType", "content", "created"];
     for (let i=0; i<requiredFields.length; i++) {
@@ -59,11 +59,11 @@ app.post('/entries', (req, res) => {
           entry => res.status(201).json(entry.apiRepr()))
         .catch(err => {
           console.error(err);
-          res.status(500).json({message: 'Internal server error'});
+          res.status(500).json({message: "Internal server error"});
         });
 });
       
-app.put('/entries/:id', (req, res) => {
+app.put("/entries/:id", (req, res) => {
         // ensure that the id in the request path and the one in request body match
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
         const message = (
@@ -89,19 +89,19 @@ app.put('/entries/:id', (req, res) => {
   // all key/value pairs in toUpdate will be updated -- that's what `$set` does
   .findByIdAndUpdate(req.params.id, {$set: toUpdate})
   .then(entry => res.status(204).end())
-  .catch(err => res.status(500).json({message: 'Internal server error'}));
+  .catch(err => res.status(500).json({message: "Internal server error"}));
 });
 
 app.delete('/entries/:id', (req, res) => {
     Entry
       .findByIdAndRemove(req.params.id)
       .then(restaurant => res.status(204).end())
-      .catch(err => res.status(500).json({message: 'Internal server error'}));
+      .catch(err => res.status(500).json({message: "Internal server error"}));
 });
 
 // catch-all endpoint if client makes request to non-existent endpoint
-app.use('*', function(req, res) {
-    res.status(404).json({message: 'Not Found'});
+app.use("*", function(req, res) {
+    res.status(404).json({message: "Not Found"});
 });
 
 
@@ -120,7 +120,7 @@ function runServer(databaseUrl=DATABASE_URL, port=PORT) {
         console.log(`Your app is listening on port ${port}`);
         resolve();
       })
-      .on('error', err => {
+      .on("error", err => {
         mongoose.disconnect();
         reject(err);
       });
@@ -133,7 +133,7 @@ function runServer(databaseUrl=DATABASE_URL, port=PORT) {
 function closeServer() {
   return mongoose.disconnect().then(() => {
      return new Promise((resolve, reject) => {
-       console.log('Closing server');
+       console.log("Closing server");
        server.close(err => {
            if (err) {
                return reject(err);
