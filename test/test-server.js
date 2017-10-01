@@ -1,6 +1,7 @@
 "use strict"
 
 var mocha = require("mocha");
+var mongoose = require("mongoose");
 var chai = require("chai");
 var chaiHttp = require("chai-http");
 const faker = require('faker');
