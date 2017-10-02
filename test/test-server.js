@@ -99,12 +99,12 @@ describe("GET endpoint", function() {
           .then(function(_res) {
             res = _res;
             res.should.have.status(200);
-            res.body.entries.should.have.length.of.at.least(1);
+            res.body.should.have.length.of.at.least(1); /* res.body.entries.should.have.length.of.at.least(1)*/
             
             return Entry.count();
           })
           .then(function(count) {
-            res.body.entries.should.have.length.of(count);
+            res.body.should.have.length.of(count); /*res.body.entries.should.have.length.of(count) */
           });
     });
 })
