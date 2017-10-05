@@ -72,23 +72,23 @@ describe("Entries API resource", function() {
 // otherwise we'd need to call a `done` callback. `runServer`,
 // `seedEntryData` and `tearDownDb` each return a promise,
 // so we return the value returned by these function calls.
-before(function() {
-  return runServer(TEST_DATABASE_URL); 
-});
+  before(function() {
+    return runServer(TEST_DATABASE_URL); 
+  });
 
-beforeEach(function() {
-  return seedEntryData();
-  console.log(seedEntryData);
-});
+  beforeEach(function() {
+    return seedEntryData();
+    console.log(seedEntryData);
+  });
 
-afterEach(function() {
-  return tearDownDb();
-});
+  afterEach(function() {
+    return tearDownDb();
+  });
 
-after(function() {
-  return closeServer();
+  after(function() {
+    return closeServer();
+  });
 });
-
 
 
 describe("GET endpoint", function() {
@@ -99,47 +99,47 @@ describe("GET endpoint", function() {
           .then(function(_res) {
             res = _res;
             res.should.have.status(200);
-            res.body.should.have.length.of.at.least(1); /* res.body.entries.should.have.length.of.at.least(1)*/
+            res.body.should.have.length.of.at.least(1);
             
             return Entry.count();
           })
           .then(function(count) {
-            res.body.should.have.length.of(count); /*res.body.entries.should.have.length.of(count) */
+            res.body.should.have.length.of(count);
           });
     });
-})
 
-it("should return entries with right fields", function() {
-  // Strategy: Get back all entries, and ensure they have expected keys
 
-  let resEntry;
-  return chai.request(app)
-    .get("/entries")
-    .then(function(res) {
-      res.should.have.status(200);
-      res.should.be.json;
-      res.body.should.be.a("array");
-      res.body.should.have.length.of.at.least(1);
+    it("should return entries with right fields", function() {
+      // Strategy: Get back all entries, and ensure they have expected keys
 
-      res.body.forEach(function(entry) {
-        entry.should.be.a("object");
-        entry.should.include.keys(
-          "id", "title", "eventType", "content", "created");
-      });
-      resEntry = res.body[0]; 
-      console.log("resEntry", resEntry);
-      return Entry.findById(resEntry.id);
-    })
-    .then(function(entry) {
-      resEntry.id.should.equal(entry.id);
-      resEntry.title.should.equal(entry.title);
-      resEntry.eventType.should.equal(entry.eventType);
-      resEntry.content.should.equal(entry.content);
-      resEntry.created.should.contain(entry.created);
-      console.log(entry.created);
+      let resEntry;
+      return chai.request(app)
+        .get("/entries")
+        .then(function(res) {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a("array");
+          res.body.should.have.length.of.at.least(1);
+
+          res.body.forEach(function(entry) {
+            entry.should.be.a("object");
+            entry.should.include.keys(
+              "id", "title", "eventType", "content", "created");
+          });
+          resEntry = res.body[0]; 
+          console.log("resEntry", resEntry);
+          return Entry.findById(resEntry.id);
+        })
+        .then(function(entry) {
+          resEntry.id.should.equal(entry.id);
+          resEntry.title.should.equal(entry.title);
+          resEntry.eventType.should.equal(entry.eventType);
+          resEntry.content.should.equal(entry.content);
+          resEntry.created.should.contain(entry.created);
+          console.log(entry.created);
+        });
+      }); 
     });
-  }); 
-});
 
 
 describe("POST endpoint", function() {
