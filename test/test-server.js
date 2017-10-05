@@ -1,6 +1,6 @@
 "use strict"
 
-const mocha = require("mocha");
+const mocha = require("mocha");  /* not required bc already a script in package.json */
 const mongoose = require("mongoose");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
@@ -118,15 +118,16 @@ it("should return entries with right fields", function() {
     .then(function(res) {
       res.should.have.status(200);
       res.should.be.json;
-      res.body.entries.should.be.a("array");
-      res.body.entries.should.have.length.of.at.least(1);
+      res.body.should.be.a("array");
+      res.body.should.have.length.of.at.least(1);
 
-      res.body.entries.forEach(function(entry) {
+      res.body.forEach(function(entry) {
         entry.should.be.a("object");
         entry.should.include.keys(
           "id", "title", "eventType", "content", "created");
       });
-      resEntry = res.body.entries[0]; /* res.body[0] ??*/
+      resEntry = res.body[0]; 
+      console.log("resEntry", resEntry);
       return Entry.findById(resEntry.id);
     })
     .then(function(entry) {
@@ -135,8 +136,9 @@ it("should return entries with right fields", function() {
       resEntry.eventType.should.equal(entry.eventType);
       resEntry.content.should.equal(entry.content);
       resEntry.created.should.contain(entry.created);
+      console.log(entry.created);
     });
-  });
+  }); 
 });
 
 
@@ -148,7 +150,7 @@ describe("POST endpoint", function() {
   it("should add a new entry", function() {
 
     const newEntry = generateEntryData();
-    console.log(newEntry);
+    // console.log(newEntry);
     return chai.request(app) /*will return a promise*/
       .post("/entries") /*should this be different?*/
       .send(newEntry)
@@ -168,10 +170,12 @@ describe("POST endpoint", function() {
 
         return Entry.findById(res.body.id);
       })
-      .then(function(dream) {
+      .then(function(entry) {
+        console.log("ENTRY", entry);
         entry.title.should.equal(newEntry.title);
         entry.eventType.should.equal(newEntry.eventType);
         entry.content.should.equal(newEntry.content);
+        console.log()
         entry.created.should.equal(newEntry.created);
       });
   });
