@@ -14,10 +14,10 @@
     <body>
         <nav role="navbar">
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Sign Up</a></li>
-                <li><a href="">Sign In</a></li>
+                <li class=""><a href="">Home</a></li>
+                <li class=""><a href="">About</a></li>
+                <li class=""><a href="">Sign Up</a></li>
+                <li class=""><a href="">Sign In</a></li>
             </ul>
         </nav>
         <header role="title">
@@ -29,10 +29,32 @@
         </header> 
 
         <main>
-            <section class="about"></section>
-            <section></section>
-        
+            <section class="about">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Never forget a celestial moment.</h2>
+                        <p>Moon Minded allows you to document your celestial experiences. You can look back on all the stars and moons you've seen with this electronic journal. </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="signup-section">
+                <form class="signup-form">
+                    <p>Start journaling today!</p>
+                    <label for="name"></label> 
+                    <input type="text" name="name" placeholder="Galileo Galilei">
+                    <label for="usernamne"></label>
+                    <input type="text" name="username" placeholder="mooncraters2">
+                    <label for="password"></label>
+                    <input type="text" name="password" placeholder="Password">
+                    <button class="submit" type="submit">Sign Up</button>
+                </form>
+            </section>
         </main>
+
+        <footer class="githublink">
+                <p class="by">Built by Camila Salvador <a href="https://github.com/alimac2/Moon-Minded" class="nostyle" rel="githublink" target="_blank"><i class="fa fa-github fa-2x githubLogo" aria-hidden="true"></i></a></p>
+        </footer>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script type="text/javascript" src="index.js"></script>
