@@ -43,7 +43,7 @@ function generateEntryEventType() {
 // can be used to generate seed data for db
 // or request.body data
 function generateEntryData() {
- console.log("FAKER", faker.date.recent()); 
+  console.log("FAKER", faker.date.recent()); 
   return {
     title: faker.lorem.sentence(),
     eventType: generateEntryEventType(),
@@ -82,9 +82,9 @@ beforeEach(function() {
   console.log(seedEntryData);
 });
 
-afterEach(function() {
-  return tearDownDb();
-});
+// afterEach(function() {
+//   return tearDownDb();
+// });
 
 after(function() {
   return closeServer();
@@ -128,7 +128,7 @@ it("should return entries with right fields", function() {
           "id", "title", "eventType", "content", "created");
       });
       resEntry = res.body[0]; 
-      /* console.log("resEntry", resEntry); */
+      console.log("resEntry", resEntry); 
       return Entry.findById(resEntry.id);
     })
     
