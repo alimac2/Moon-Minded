@@ -43,7 +43,7 @@ function generateEntryEventType() {
 // can be used to generate seed data for db
 // or request.body data
 function generateEntryData() {
-  console.log("FAKER", faker.date.recent()); 
+  // console.log("FAKER", faker.date.recent()); 
   return {
     title: faker.lorem.sentence(),
     eventType: generateEntryEventType(),
@@ -100,12 +100,12 @@ describe("GET endpoint", function() {
           .then(function(_res) {
             res = _res;
             res.should.have.status(200);
-            res.body.should.have.length.of.at.least(1); /* res.body.entries.should.have.length.of.at.least(1)*/
+            res.body.should.have.length.of.at.least(1);
             
             return Entry.count();
           })
           .then(function(count) {
-            res.body.should.have.length.of(count); /*res.body.entries.should.have.length.of(count) */
+            res.body.should.have.length(count);
           });
     });
 })
@@ -133,12 +133,14 @@ it("should return entries with right fields", function() {
     })
     
     .then(function(entry) {
-      console.log("ENTRY CREATED", entry.created);
+      
+      console.log("ENTRY CREATED", typeof entry.created); /* object */
+      console.log("RESENTRY", typeof resEntry.created); /* string */ 
       resEntry.id.should.equal(entry.id);
       resEntry.title.should.equal(entry.title);
       resEntry.eventType.should.equal(entry.eventType);
       resEntry.content.should.equal(entry.content);
-      resEntry.created.should.contain(entry.created);
+      resEntry.created.toString().should.equal(entry.created.toString());
     });
   }); 
 });
@@ -154,9 +156,10 @@ describe("POST endpoint", function() {
     const newEntry = generateEntryData();
     // console.log(newEntry);
     return chai.request(app) /*will return a promise*/
-      .post("/entries") /*should this be different?*/
+      .post("/entries") /*should this be different? Make sure the endpoints work and that you are receiving everything okay.*/
       .send(newEntry)
       .then(function(res) {
+        console.log("RESPONSE", res);
         res.should.have.status(201);
         res.should.be.json;
         res.body.should.be.a("object");
@@ -179,6 +182,7 @@ describe("POST endpoint", function() {
         entry.content.should.equal(newEntry.content);
         console.log()
         entry.created.should.equal(newEntry.created);
+        done();
       });
   });
 });
