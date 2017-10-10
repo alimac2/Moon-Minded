@@ -61,7 +61,7 @@ function generateEntryData() {
     title: faker.lorem.sentence(),
     eventType: generateEntryEventType(),
     content: faker.lorem.paragraph(),
-    created: faker.date.recent() /* this returns an object */
+    created: faker.date.recent().toString() /* this returns an object */
   }
 }
 
@@ -178,7 +178,6 @@ describe("POST endpoint", function() {
       })
       .then(function(entry) {
         // console.log("ENTRY", entry);
-        conso
         entry.title.should.equal(newEntry.title);
         entry.eventType.should.equal(newEntry.eventType);
         entry.content.should.equal(newEntry.content);
