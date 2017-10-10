@@ -1,6 +1,5 @@
 "use strict"
 
-const mocha = require("mocha");  /* not required bc already a script in package.json */
 const mongoose = require("mongoose");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
@@ -14,6 +13,20 @@ const {Entry} = require("../models");
 const {app, runServer, closeServer} = require("../server");
 const {DATABASE_URL} = require("../config");
 const {TEST_DATABASE_URL} = require("../config");
+
+
+// this function deletes the entire database.
+// we'll call it in an `afterEach` block below
+// to ensure  ata from one test does not stick
+// around for next one
+function tearDownDb() {
+  return new Promise((resolve, reject) => {
+    console.warn("Deleting database");
+    mongoose.connection.dropDatabase()
+      .then(result => resolve(result))
+      .catch(err => reject(err))
+  });
+}
 
 
 // used to put randomish documents in db
@@ -39,33 +52,19 @@ function generateEntryEventType() {
   return type[Math.floor(Math.random() * type.length)];
 }
 
-// generate an object represnting a entry.
+// generated an object representing an entry.
 // can be used to generate seed data for db
 // or request.body data
 function generateEntryData() {
-  // console.log("FAKER", faker.date.recent()); 
+  /* console.log("FAKER", typeof faker.date.recent()); */
   return {
     title: faker.lorem.sentence(),
     eventType: generateEntryEventType(),
     content: faker.lorem.paragraph(),
-    created: faker.date.recent()
+    created: faker.date.recent() /* this returns an object */
   }
 }
 
-
-// this function deletes the entire database.
-// we'll call it in an `afterEach` block below
-// to ensure  ata from one test does not stick
-// around for next one
-function tearDownDb() {
-  return new Promise((resolve, reject) => {
-    console.warn("Deleting database");
-    mongoose.connection.dropDatabase()
-      .then(result => resolve(result))
-      .catch(err => reject(err))
-  });
-}
-/*should I add more to this?*/
 
 describe("Entries API resource", function() {
 
@@ -82,9 +81,9 @@ beforeEach(function() {
   console.log(seedEntryData);
 });
 
-// afterEach(function() {
-//   return tearDownDb();
-// });
+afterEach(function() {
+  return tearDownDb();
+});
 
 after(function() {
   return closeServer();
@@ -104,46 +103,46 @@ describe("GET endpoint", function() {
             
             return Entry.count();
           })
-          .then(function(count) {
+          .then(count => {
             res.body.should.have.length(count);
           });
     });
-})
 
-it("should return entries with right fields", function() {
-  // Strategy: Get back all entries, and ensure they have expected keys
 
-  let resEntry;
-  return chai.request(app)
-    .get("/entries")
-    .then(function(res) {
-      res.should.have.status(200);
-      res.should.be.json;
-      res.body.should.be.a("array");
-      res.body.should.have.length.of.at.least(1);
+  it("should return entries with right fields", function() {
+    // Strategy: Get back all entries, and ensure they have expected keys
 
-      res.body.forEach(function(entry) {
-        entry.should.be.a("object");
-        entry.should.include.keys(
-          "id", "title", "eventType", "content", "created");
-      });
-      resEntry = res.body[0]; 
-      console.log("resEntry", resEntry); 
-      return Entry.findById(resEntry.id);
-    })
-    
-    .then(function(entry) {
+    let resEntry;
+    return chai.request(app)
+      .get("/entries")
+      .then(function(res) {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a("array");
+        res.body.should.have.length.of.at.least(1);
+
+        res.body.forEach(function(entry) {
+          entry.should.be.a("object");
+          entry.should.include.keys(
+            "id", "title", "eventType", "content", "created");
+        });
+        resEntry = res.body[0]; 
+        /* console.log("resEntry", resEntry); */
+        return Entry.findById(resEntry.id);
+      })
       
-      console.log("ENTRY CREATED", typeof entry.created); /* object */
-      console.log("RESENTRY", typeof resEntry.created); /* string */ 
-      resEntry.id.should.equal(entry.id);
-      resEntry.title.should.equal(entry.title);
-      resEntry.eventType.should.equal(entry.eventType);
-      resEntry.content.should.equal(entry.content);
-      resEntry.created.should.equal(entry.created);
-    });
-  }); 
-});
+      .then(function(entry) {
+        
+        // console.log("ENTRY CREATED", typeof entry.created); 
+        // console.log("RESENTRY", typeof resEntry.created); 
+        resEntry.id.should.equal(entry.id);
+        resEntry.title.should.equal(entry.title);
+        resEntry.eventType.should.equal(entry.eventType);
+        resEntry.content.should.equal(entry.content);
+        resEntry.created.should.equal(entry.created);
+      });
+    }); 
+  }); /* need to figure out what the closing brakets match up to  */
 
 
 describe("POST endpoint", function() {
@@ -159,7 +158,9 @@ describe("POST endpoint", function() {
       .post("/entries") /*should this be different? Make sure the endpoints work and that you are receiving everything okay.*/
       .send(newEntry)
       .then(function(res) {
-        console.log("RESPONSE", res);
+        /* console.log("RESPONSE", res); */
+        console.log("RESBODY", typeof res.body.created); /* string */
+        console.log("NEWENTRY", typeof newEntry.created); /* object */
         res.should.have.status(201);
         res.should.be.json;
         res.body.should.be.a("object");
@@ -176,13 +177,12 @@ describe("POST endpoint", function() {
         return Entry.findById(res.body.id);
       })
       .then(function(entry) {
-        console.log("ENTRY", entry);
+        // console.log("ENTRY", entry);
+        conso
         entry.title.should.equal(newEntry.title);
         entry.eventType.should.equal(newEntry.eventType);
         entry.content.should.equal(newEntry.content);
-        console.log()
         entry.created.should.equal(newEntry.created);
-        done();
       });
   });
 });
@@ -199,11 +199,11 @@ describe("PUT endpoint", function() {
     const updateData = {
       title: "The Moon and the Stars",
       eventType: "milky way"
-    };
+    }; /* come back to this and make sure updateData reflects real data */
   
     return Entry
       .findOne()
-      .then(function(entry) {
+      .then(entry => {
         updateData.id = entry.id;
     
         // make request then inspect it to make sure it reflects
@@ -212,14 +212,14 @@ describe("PUT endpoint", function() {
           .put(`/entries/${entry.id}`)
           .send(updateData);
       })
-      .then(function(res) {
+      .then(res => {
         res.should.have.status(204);
     
         return Entry.findById(updateData.id);
       })
-      .then(function(entry) {
+      .then(entry => {
         entry.title.should.equal(updateData.title);
-        entry.eventType.should.equal(updateData.eventType);
+        entry.eventType.should.equal(updateData.eventType); 
       });
     });
   });
@@ -231,13 +231,13 @@ describe("PUT endpoint", function() {
     //  2. make a DELETE request for that entry's id
     //  3. assert that response has right status code
     //  4. prove that entry with the id doesn't exist in db anymore
-    it("delete an entry by id", function() {
+    it("should delete an entry by id", function() {
 
       let entry;
 
       return Entry
         .findOne()
-        .then(function(_entry) {
+        .then(_entry => {
           entry = _entry;
           return chai.request(app).delete(`/entires/${entry.id}`); /* `/entires/${entry.id}/json` */
         })
@@ -245,7 +245,7 @@ describe("PUT endpoint", function() {
           res.should.have.status(204);
           return Entry.findById(entry.id);
         })
-        .then(function(_entry) {
+        .then(_entry => {
           // when a variable's value is null, chaining `should`
           // doesn't work. so `_entry.should.be.null` would raise
           // an error. `should.be.null(_entry)` is how we can
@@ -254,3 +254,4 @@ describe("PUT endpoint", function() {
         });
     });
   });
+});
