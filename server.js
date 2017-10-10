@@ -18,7 +18,7 @@ app.get("/entries", (req, res) => {
     Entry
       .find()
       .then(entries => {
-        res.json(entries.map(post => post.apiRepr()));
+        res.json(entries.map(entry => entry.apiRepr()));
       })
       .catch(err => {
         console.error(err);
@@ -30,7 +30,7 @@ app.get("/entries", (req, res) => {
 app.get("/entries/:id", (req, res) => {
     Entry
       .findById(req.params.id)
-      .then(post => res.json(post.apiRepr()))
+      .then(entry => res.json(entry.apiRepr()))
       .catch(err => {
         console.error(err);
         res.status(500).json({error: "Internal server error"});
@@ -95,7 +95,7 @@ app.put("/entries/:id", (req, res) => {
 app.delete('/entries/:id', (req, res) => {
     Entry
       .findByIdAndRemove(req.params.id)
-      .then(restaurant => res.status(204).end())
+      .then(entry => res.status(204).end())
       .catch(err => res.status(500).json({message: "Internal server error"}));
 });
 

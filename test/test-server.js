@@ -140,7 +140,7 @@ it("should return entries with right fields", function() {
       resEntry.title.should.equal(entry.title);
       resEntry.eventType.should.equal(entry.eventType);
       resEntry.content.should.equal(entry.content);
-      resEntry.created.toString().should.equal(entry.created.toString());
+      resEntry.created.should.equal(entry.created);
     });
   }); 
 });
