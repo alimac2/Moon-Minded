@@ -239,7 +239,7 @@ describe("PUT endpoint", function() {
         .findOne()
         .then(_entry => {
           entry = _entry;
-          return chai.request(app).delete(`/entires/${entry.id}`); /* `/entires/${entry.id}/json` */
+          return chai.request(app).delete(`/entries/${entry.id}`); /* `/entires/${entry.id}/json` */
         })
         .then(function(res) {
           res.should.have.status(204);
