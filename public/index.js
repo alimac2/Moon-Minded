@@ -1,3 +1,5 @@
+"use strict"
+
 const MOCK_ENTRY = {
     "journalEntries": [
         {
@@ -24,10 +26,27 @@ const MOCK_ENTRY = {
     ]
 };
 
+/* click on creating new entry
+eventPreventDefault()
+pull values of data .val()
+POST AJAX request when click happens */
+$.ajax({
+    method: POST,
+    url: "/entries",
+    dataType: "json",
+    data: JSON.stringify({entryData}), /* type in data object */
+    contentType: "application/json", 
+    crossDomain: true, /* may not need for each endpoint - check */
+    success: function(data) {
+        console.log("function worked");
+    },
+});
+
+
 function getEntries(callbackFn) {
     $.ajax({
         method: "GET",
-        url: ENTRIES, /* fill in with valid url */
+        url: "/entries", 
         dataType: "json",
         success: function(data) {},
         contentType: 
@@ -37,7 +56,7 @@ function getEntries(callbackFn) {
 function updateEntries(callbackFn) {
     $.ajax({
         method: "PUT",
-        url: ENTRIES, /* rework*/
+        url: "/entries", 
         data: data,
         success: function(data) {},
     });
