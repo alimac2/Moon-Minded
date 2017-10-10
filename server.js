@@ -3,16 +3,19 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const {DATABASE_URL, PORT} = require("./config");
 const {Entry} = require("./models");
 
 const app = express();
+
+/* application level middleware */
 app.use(bodyParser.json());
 app.use(express.static("public"));
+app.use(cors());
 
 mongoose.Promise = global.Promise;
-
 
 app.get("/entries", (req, res) => {
     Entry
