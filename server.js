@@ -54,7 +54,8 @@ app.post("/entries", (req, res) => {
           title: req.body.title,
           eventType: req.body.eventType,
           content: req.body.content,
-          created: req.body.created,})
+          created: req.body.created,
+        })
         .then(
           entry => res.status(201).json(entry.apiRepr()))
         .catch(err => {
@@ -70,12 +71,12 @@ app.put("/entries/:id", (req, res) => {
             `Request path id (${req.params.id}) and request body id ` +
             `(${req.body.id}) must match`);
           console.error(message);
-          res.status(400).json({message: message});
+          res.status(400).json({error: message});
     }
       
-        // we only support a subset of fields being updateable.
-        // if the user sent over any of the updatableFields, we udpate those values
-        // in document
+    // we only support a subset of fields being updateable.
+    // if the user sent over any of the updatableFields, we udpate those values
+    // in document
     const toUpdate = {};
     const updateableFields = ["title", "eventType", "content", "created"];
       
@@ -85,19 +86,25 @@ app.put("/entries/:id", (req, res) => {
         }
     });
 
-  Entry
-  // all key/value pairs in toUpdate will be updated -- that's what `$set` does
-  .findByIdAndUpdate(req.params.id, {$set: toUpdate})
-  .then(entry => res.status(204).end())
-  .catch(err => res.status(500).json({message: "Internal server error"}));
+    Entry
+    // all key/value pairs in toUpdate will be updated -- that's what `$set` does
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
+    .then(updatedEntry => res.status(204).end())
+    .catch(err => res.status(500).json({message: "Internal server error"}));
 });
 
 app.delete('/entries/:id', (req, res) => {
     Entry
-      .findByIdAndRemove(req.params.id)
-      .then(entry => res.status(204).end())
-      .catch(err => res.status(500).json({message: "Internal server error"}));
+    .findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).json({message: "success"});
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({error: "Internal server error"});
+    });
 });
+
 
 // catch-all endpoint if client makes request to non-existent endpoint
 app.use("*", function(req, res) {
