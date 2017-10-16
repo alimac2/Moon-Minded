@@ -42,7 +42,6 @@ $.ajax({
     },
 });
 
-
 function getEntries(callbackFn) {
     $.ajax({
         method: "GET",

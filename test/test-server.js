@@ -67,28 +67,26 @@ function generateEntryData() {
 
 
 describe("Entries API resource", function() {
-
 // we need each of these hook functions to return a promise
 // otherwise we'd need to call a `done` callback. `runServer`,
 // `seedEntryData` and `tearDownDb` each return a promise,
 // so we return the value returned by these function calls.
-before(function() {
-  return runServer(TEST_DATABASE_URL); 
-});
+  before(function() {
+    return runServer(TEST_DATABASE_URL); 
+  });
 
-beforeEach(function() {
-  return seedEntryData();
-  console.log(seedEntryData);
-});
+  beforeEach(function() {
+    return seedEntryData();
+    console.log(seedEntryData);
+  });
 
-afterEach(function() {
-  return tearDownDb();
-});
+  afterEach(function() {
+    return tearDownDb();
+  });
 
-after(function() {
-  return closeServer();
-});
-
+  after(function() {
+    return closeServer();
+  });
 
 
 describe("GET endpoint", function() {
@@ -107,7 +105,6 @@ describe("GET endpoint", function() {
             res.body.should.have.length(count);
           });
     });
-
 
   it("should return entries with right fields", function() {
     // Strategy: Get back all entries, and ensure they have expected keys
@@ -142,7 +139,7 @@ describe("GET endpoint", function() {
         resEntry.created.should.equal(entry.created);
       });
     }); 
-  }); /* need to figure out what the closing brakets match up to  */
+}); /* need to figure out what the closing brakets match up to - line 92 */
 
 
 describe("POST endpoint", function() {
@@ -185,7 +182,6 @@ describe("POST endpoint", function() {
       });
   });
 });
-
 
 
 describe("PUT endpoint", function() {
@@ -233,7 +229,6 @@ describe("PUT endpoint", function() {
     it("should delete an entry by id", function() {
 
       let entry;
-
       return Entry
         .findOne()
         .then(_entry => {
