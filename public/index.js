@@ -5,13 +5,20 @@ eventPreventDefault()
 pull values of data .val()
 POST AJAX request when click happens */
 
-function submitEntry() {
-    $(".submit-entry").submit(event => {
+// function submitEntry() {
+    $(".submit-entry").click(function() {
         event.preventDefault();
-        const entryTitle = $("entry-title").val(); 
+        const entryTitle = $(".entry-title").val();
+        const eventType = $(".event-type").val();
+        const entryContent = $(".content").val();
+        const entryDate = $(".date-created").val();
+
         console.log(entryTitle);
+        console.log(eventType);
+        console.log(entryContent);
+        console.log(entryDate);
     });
-}
+// }
 
 
 // $.ajax({
