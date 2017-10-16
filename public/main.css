@@ -20,3 +20,8 @@ nav {
 h1 {
     font-family: 'Cinzel Decorative', cursive;
 }
+
+.form {
+	display: block;
+	text-align: center;
+}
