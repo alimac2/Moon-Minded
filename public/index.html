@@ -48,14 +48,26 @@
             </section>
 
             <section>
-                <!-- 
-                    New entry with forms for:
-                    - title box
-                    - text box
-                    - date
-                    - type
-                -->
+                <form>
+                    <input class="entry-title" type="text" placeholder="Entry Title">
+                    <select class="event-type">
+                        <option value="moon">moon</option>
+                        <option>stargazing</option>
+                        <option>constellations</option>
+                        <option>meteor shower</option>
+                        <option>milky way</option>
+                        <option>planets</option>
+                        <option>solar eclipse</option>
+                        <option>lunar eclipse</option>
+                    </select>
+                    <textarea class="content"></textarea>
+                    <label>Entry Date and Time</label>
+                    <input class="date-created" id="datetime" type="datetime-local">
+                   
+                   <button name="submit-btn" type="submit">Submit</button>
+                </form>    
             </section>
+            
             <!-- <section class="signup-section">
                 <form class="signup-form">
                     <p>Start journaling today!</p>
