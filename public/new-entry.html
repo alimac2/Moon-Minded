@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+        <link rel = "stylesheet" type = "text/css" href = "main.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
+    </head>
+
+    <body>
+        <nav role="navbar">
+            <ul>
+                <li class="nav-title"><span>Moon Minded</span></li>
+                <li class=""><a href="">All Entries</a></li>
+                <li class=""><a href="">Create New Entry</a></li>
+                <li class=""><a href="">Logout</a></li>
+            </ul>
+        </nav>
+
+        <form class="new-entry" method="post">
+            <fieldset>
+                <label>New Entry</label>
+                <input placeholder="Entry Title" type="text" name="entry-name" autocomplete="off">
+                <textarea class="entry-body"></textarea>
+            </fieldset>
+            
+            <section class="entry-details">
+                <div class="date-and-time">
+                    <label>Event Date and Time</label>
+                    <input id="datetime" type="datetime-local">
+
+                    <label>Entry Date and Time</label>
+                    <input id="datetime" type="datetime-local">
+                </div>
+
+                <div class="event-type">
+                    <input type="radio" value="0">
+                    <label>Moon</label>
+                    <input type="radio" value="1">
+                    <label>Stargazing</label>
+                    <input type="radio" value="2">
+                    <label>Constellations</label>
+                    <input type="radio" value="3">
+                    <label>Meteor Shower</label>
+                    <input type="radio" value="4">
+                    <label>Milky Way</label>
+                    <input type="radio" value="5">
+                    <label>Planets</label>
+                    <input type="radio" value="6">
+                    <label>Solar Eclipse</label>
+                    <input type="radio" value="7">
+                    <label>Lunar Eclipse</label>
+                </div>
+
+                <div class="location">
+                    <label>Location</label>
+                    <input placeholder="City, State, Country" type="text">
+                </div>
+
+            </section>
+
+
+
+        </form>
+
+
+        
+
+
+
+    </body>
+</html>
