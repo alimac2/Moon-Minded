@@ -17,6 +17,7 @@ app.use(cors());
 
 mongoose.Promise = global.Promise;
 
+
 app.get("/entries", (req, res) => {
     Entry
       .find()
@@ -39,6 +40,7 @@ app.get("/entries/:id", (req, res) => {
         res.status(500).json({error: "Internal server error"});
       });
 });
+
 
 app.post("/entries", (req, res) => {
     
@@ -66,7 +68,8 @@ app.post("/entries", (req, res) => {
           res.status(500).json({message: "Internal server error"});
         });
 });
-      
+     
+
 app.put("/entries/:id", (req, res) => {
         // ensure that the id in the request path and the one in request body match
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
@@ -96,6 +99,7 @@ app.put("/entries/:id", (req, res) => {
     .catch(err => res.status(500).json({message: "Internal server error"}));
 });
 
+
 app.delete('/entries/:id', (req, res) => {
     Entry
     .findByIdAndRemove(req.params.id)
@@ -109,16 +113,14 @@ app.delete('/entries/:id', (req, res) => {
 });
 
 
-// catch-all endpoint if client makes request to non-existent endpoint
+/* catch-all endpoint if client makes request to non-existent endpoint */
 app.use("*", function(req, res) {
     res.status(404).json({message: "Not Found"});
 });
 
 
-
 let server;
-
-// this function connects to our database, then starts the server
+/* this function connects to our database, then starts the server */
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
 
   return new Promise((resolve, reject) => {
@@ -138,6 +140,7 @@ function runServer(databaseUrl=DATABASE_URL, port=PORT) {
   });
 }
 
+
 // this function closes the server, and returns a promise. we'll
 // use it in our integration tests later.
 function closeServer() {
@@ -153,6 +156,7 @@ function closeServer() {
      });
   });
 }
+
 
 // if server.js is called directly (aka, with `node server.js`), this block
 // runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
