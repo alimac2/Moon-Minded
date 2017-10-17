@@ -19,21 +19,24 @@ POST AJAX request when click happens */
         console.log(entryDate);
     });
 // }
+/* how is javascript connecting to html*/
 
-
-// $.ajax({
-//     method: POST,
-//     url: "/entries",
-//     dataType: "json",
-//     data: JSON.stringify({
-
-//     }), /* type in data object - how is javascript connecting to html*/
-//     contentType: "application/json", 
-//     crossDomain: true, /* may not need for each endpoint - check */
-//     success: function(data) {
-//         console.log("function worked");
-//     },
-// });
+$.ajax({
+    method: POST,
+    url: "/entries",
+    dataType: "json",
+    data: JSON.stringify({
+        title: $(".entry-title").val(),
+        eventType: $(".event-type").val(),
+        content: $(".content").val(),
+        created: $(".date-created").val()
+    }), /* type in data object */
+    contentType: "application/json", 
+    crossDomain: true, /* may not need for each endpoint - check */
+    success: function(data) {
+        console.log("function worked");
+    },
+});
 
 
 // function getEntries(callbackFn) {
