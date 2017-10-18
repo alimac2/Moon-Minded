@@ -5,13 +5,14 @@
 // function submitEntry() {
 $(".submit-entry").click(function() {
     event.preventDefault();
+    
     const entryTitle = $(".entry-title").val();
     const eventType = $(".event-type").val();
     const entryContent = $(".content").val();
     const entryDate = $(".date-created").val();
-        
+      
     $.ajax({
-        method: POST,
+        method: "POST", /* added quotes to make a string */
         url: "/entries",
         dataType: "json",
         data: JSON.stringify({
