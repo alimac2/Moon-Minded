@@ -17,13 +17,14 @@ function submitEntryData() {    /* possibly rename */
         };
         
         $.ajax({
-            type: "POST",
+            method: "POST",
             url: "/entries",
             dataType: "json",
             data: JSON.stringify(entryDetails),
             contentType: "application/json", 
             success: function(data) {
-                console.log("function worked");
+                console.log("function worked"); /*Display data, call function to display data*/
+                /* create function maybbe. toggleclass or removeclass hidden to hide post form - show other section */
             }
         });     
     });
@@ -31,20 +32,24 @@ function submitEntryData() {    /* possibly rename */
 
 submitEntryData();
  
-// function createNewEntry(entryDetails) {
-//     $.ajax({
-//         method: "POST",
-//         url: "/entries",
-//         dataType: "json",
-//         data: JSON.stringify(entryDetails),
-//         contentType: "application/json", 
-//         success: function(data) {
-//             console.log("function worked");
-//         },
-//     });
-// }
+function deleteEntry(entryDetails) { /*data*/
+    $(".delete-entry").click(function() {
+        event.preventDefault()
+    }); /*review - do you need event in the jquery event callback?*/
 
-// createNewEnry(submitEntryData());
+    $.ajax({
+        method: "DELETE",
+        url: "/entries", 
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(entryDetails),
+        success: function(data) {
+            console.log("it works too");
+        }
+    });
+}
+
+
 
 // function getEntries(callbackFn) {
 //     $.ajax({
