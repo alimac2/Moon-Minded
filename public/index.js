@@ -1,38 +1,50 @@
 "use strict"
 
+function submitEntryData() {    /* possibly rename */
+    $(".submit-entry").click(function() {
+        event.preventDefault();
 
-
-// function submitEntry() {
-$(".submit-entry").click(function() {
-    event.preventDefault();
-    
-    const entryTitle = $(".entry-title").val();
-    const eventType = $(".event-type").val();
-    const entryContent = $(".content").val();
-    const entryDate = $(".date-created").val();
-      
-    $.ajax({
-        method: "POST", /* added quotes to make a string */
-        url: "/entries",
-        dataType: "json",
-        data: JSON.stringify({
+        const entryTitle = $(".entry-title").val();
+        const eventType = $(".event-type").val();
+        const entryContent = $(".content").val();
+        const entryDate = $(".date-created").val();
+        
+        const entryDetails =  {
             title: entryTitle,
             eventType: eventType,
             content: entryContent,
             created: entryDate
-        }),
-        contentType: "application/json", 
-        crossDomain: true, /* may not need for each endpoint - check */
-        success: function(data) {
-            console.log("function worked");
-        },
+        };
+        
+        $.ajax({
+            type: "POST",
+            url: "/entries",
+            dataType: "json",
+            data: JSON.stringify(entryDetails),
+            contentType: "application/json", 
+            success: function(data) {
+                console.log("function worked");
+            }
+        });     
     });
-});
+}
+
+submitEntryData();
+ 
+// function createNewEntry(entryDetails) {
+//     $.ajax({
+//         method: "POST",
+//         url: "/entries",
+//         dataType: "json",
+//         data: JSON.stringify(entryDetails),
+//         contentType: "application/json", 
+//         success: function(data) {
+//             console.log("function worked");
+//         },
+//     });
 // }
-/* how is javascript connecting to html*/
 
-
-
+// createNewEnry(submitEntryData());
 
 // function getEntries(callbackFn) {
 //     $.ajax({
