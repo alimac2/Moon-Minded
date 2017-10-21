@@ -1,6 +1,8 @@
 "use strict"
 
 
+/* global variable called state. State is where you start off.  */
+
 $(".nav-link-create").click(function() {
   $(".new-entry-page").removeClass("hidden");  
 });
@@ -38,27 +40,25 @@ function submitEntryData() {    /* possibly rename */
             }
         });     
     });
-}
+};
 
-submitEntryData();
- 
 
 function getEntries(callbackFn) {
     $.ajax({
         method: "GET",
         url: "/entries", 
         dataType: "json",
-        data: entryDetails/* maybe entryDetails, DOUBLE CHECK */,
         contentType: "application/json", 
         success: function(data) {
+            displayEntries(data);
             console.log("GET request works");
         }
     });
-}
+};
 
 function displayEntries(data) {
     for (index in data) {
-        $("body").append(
+        $(".all-entries").append(
             `<div class='entries-display'>
                 <p>data[index].created</p>
                 <p>data[index].title</p>
@@ -66,16 +66,12 @@ function displayEntries(data) {
                 <button class='delete-btn'>Delete</button>
             </div>`
         );  
-    }
-}
+    };
+};
 
-function getAndDisplayEntries() {
-    getEntries(displayEntries);
-}
-
-$(function() {
-    getAndDisplayEntries();
-})
+// function getAndDisplayEntries() {
+//     getEntries(displayEntries);
+// }
 
 
 function deleteEntry() { /*entryId, data, or entryDetails*/
@@ -98,9 +94,6 @@ function deleteEntry() { /*entryId, data, or entryDetails*/
     });
 }
 
-deleteEntry();
-
-
 
 function updateEntries(callbackFn) {
     $.ajax({
@@ -113,3 +106,10 @@ function updateEntries(callbackFn) {
         },
     });
 }
+
+/* document ready*/
+$(function() {
+submitEntryData();
+deleteEntry();
+
+});
