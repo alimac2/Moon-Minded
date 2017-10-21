@@ -59,12 +59,12 @@ function getEntries(callbackFn) {
 function displayEntries(data) {
     for (index in data) {
         $("body").append(
-            "<div class='entries-display'>" +
-                "<p>" + data[index].created + "</p>" +
-                "<p>" + data[index].title + "</p>" +
-                "<button class='edit-btn>" + Edit + "</button>" +
-                "<button class='delete-btn'>" + Delete + "</button>" +
-            "</div>"
+            `<div class='entries-display'>
+                <p>data[index].created</p>
+                <p>data[index].title</p>
+                <button class="edit-btn">Edit</button>
+                <button class='delete-btn'>Delete</button>
+            </div>`
         );  
     }
 }
