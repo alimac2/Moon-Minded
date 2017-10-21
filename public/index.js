@@ -8,11 +8,6 @@ $(".nav-link-create").click(function() {
 
 
 
-
-
-
-
-
 function submitEntryData() {    /* possibly rename */
     $(".submit-entry").click(function() {
         event.preventDefault();
@@ -64,9 +59,11 @@ function getEntries(callbackFn) {
 function displayEntries(data) {
     for (index in data) {
         $("body").append(
-            "<div>" +
+            "<div class='entries-display'>" +
                 "<p>" + data[index].created + "</p>" +
                 "<p>" + data[index].title + "</p>" +
+                "<button class='edit-btn>" + Edit + "</button>" +
+                "<button class='delete-btn'>" + Delete + "</button>" +
             "</div>"
         );  
     }
@@ -85,7 +82,7 @@ function deleteEntry() { /*entryId, data, or entryDetails*/
     $(".delete-entry").click(function() {
         event.preventDefault();
         
-        const entryId = $(".class-name").val(); /* all delete buttons will have the same class, grabbed from DOM*/
+        const entryId = $(".delete-btn").val(); /* all delete buttons will have the same class, grabbed from DOM*/
 
     }); /*review - do you need event in the jquery event callback?*/
 
@@ -105,13 +102,14 @@ deleteEntry();
 
 
 
-
-
-// function updateEntries(callbackFn) {
-//     $.ajax({
-//         method: "PUT",
-//         url: "/entries", 
-//         data: data,
-//         success: function(data) {},
-//     });
-// }
+function updateEntries(callbackFn) {
+    $.ajax({
+        method: "PUT",
+        url: "/entries/entryId", 
+        dataType: "json",
+        data: entryDetails, /* make sure this is corerct */
+        success: function(data) {
+            console.log("PUT request works");
+        },
+    });
+}
