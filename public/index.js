@@ -50,7 +50,8 @@ function getEntries() {
         dataType: "json",
         contentType: "application/json", 
         success: function(data) {
-            // displayEntries(data);
+            console.log(data);
+            displayEntries(data);
             console.log("GET request works");
         }
     });
@@ -58,13 +59,13 @@ function getEntries() {
 
 function displayEntries(data) {
 
-    for (index in data) {
+    for (let i = 0; i < data.length; i++) {
     console.log(data);
-    console.log(index);
+    console.log(i);
         $(".all-entries").append(
-            `<div class='entries-display'>
-                <p>data[index].created</p>
-                <p>data[index].title</p>
+            `<div class="entries-display">
+                <p>data[i].created</p>
+                <p>data[i].title</p>
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
             </div>`
