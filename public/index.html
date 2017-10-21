@@ -8,11 +8,13 @@
         <title>Moon Minded</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
         <link rel = "stylesheet" type = "text/css" href = "main.css"/>
+        <link rel="stylesheet" type="text/css" href="grid.css">
         <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
-
     </head>
+
     <body>
-        <nav role="navbar">
+        <!-- LANDING PAGE  -->
+        <!-- <nav role="navbar" class="main-navbar">
             <ul>
                 <li class=""><a href="">Home</a></li>
                 <li class=""><a href="">About</a></li>
@@ -39,43 +41,7 @@
                 </div>
             </section>
 
-            <section>
-                <!-- 
-                    All entries 
-                    - update
-                    - delete
-                -->
-            </section>
-
-            <section class="form">
-                <form>
-                    <input class="entry-title" type="text" placeholder="Entry Title">
-                    <br>
-                    <label>Event Type</label>
-                    <br>
-                    <select class="event-type">
-                        <option value="moon">moon</option>
-                        <option value="stargazing">stargazing</option>
-                        <option value="constellations">constellations</option>
-                        <option value="meteor-shower">meteor shower</option>
-                        <option value="milky-way">milky way</option>
-                        <option value="planets">planets</option>
-                        <option value="solar-eclipse">solar eclipse</option>
-                        <option value="lunar-eclipse">lunar eclipse</option>
-                    </select>
-                    <br>
-                    <textarea class="content"></textarea>
-                    <br>
-                    <label>Entry Date and Time</label>
-                    <br>
-                    <input class="date-created" id="datetime" type="datetime-local">
-                   	<br>
-                       <button class="submit-entry" name="submit-btn" type="submit">Submit</button>
-                       <button class="delete-entry" name="delete-btn" type="button">Delete</button>
-                </form>    
-            </section>
-            
-            <!-- <section class="signup-section">
+            <section class="signup-section">
                 <form class="signup-form">
                     <p>Start journaling today!</p>
                     <label for="name"></label> 
@@ -86,13 +52,65 @@
                     <input type="text" name="password" placeholder="Password">
                     <button class="submit" type="submit">Sign Up</button>
                 </form>
-            </section> -->
-        </main>
+            </section>
+        
 
-        <footer class="githublink">
-                <p class="by">Built by Camila Salvador <a href="https://github.com/alimac2/Moon-Minded" class="nostyle" rel="githublink" target="_blank"><i class="fa fa-github fa-2x githubLogo" aria-hidden="true"></i></a></p>
-        </footer>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+            <footer class="githublink">
+                    <p class="by">Built by Camila Salvador <a href="https://github.com/alimac2/Moon-Minded" class="nostyle" rel="githublink" target="_blank"><i class="fa fa-github fa-2x githubLogo" aria-hidden="true"></i></a></p>
+            </footer>
+        </main> -->
+
+            <!-- NAV BAR AFTER LOGIN -->
+
+            <nav role="navbar-entries">
+                <ul>
+                    <li class="nav-logo"><span>Moon Minded</span></li>
+                    <li class="nav-link"><a href="">All Entries</a></li>
+                    <li class="nav-link"><a href="">Create New Entry</a></li>
+                    <li class="nav-link"><a href="">Logout</a></li>
+                </ul>
+            </nav>
+
+            <!-- NEW ENTRY PAGE -->
+            <section class="new-entry-page">
+                    <form class="entry-details">
+                        <input class="entry-title" type="text" placeholder="Entry Title">
+                        <br>
+                        <label>Event Type</label>
+                        <br>
+                        <select class="event-type">
+                            <option value="moon">moon</option>
+                            <option value="stargazing">stargazing</option>
+                            <option value="constellations">constellations</option>
+                            <option value="meteor-shower">meteor shower</option>
+                            <option value="milky-way">milky way</option>
+                            <option value="planets">planets</option>
+                            <option value="solar-eclipse">solar eclipse</option>
+                            <option value="lunar-eclipse">lunar eclipse</option>
+                        </select>
+                        <br>
+                        <textarea class="content"></textarea>
+                        <br>
+                        <label>Entry Date and Time</label>
+                        <br>
+                        <input class="date-created" id="datetime" type="datetime-local">
+                           <br>
+                           <button class="submit-entry" name="submit-btn" type="submit">Submit</button>
+                           <button class="delete-entry" name="delete-btn" type="button">Delete</button>
+                    </form>    
+                </section>
+        
+                    </section>
+                </form>
+            </section>
+
+            <!-- ALL ENTRIES PAGE  -->
+            <section class="all-entries">
+             
+            </section>
+
+            
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script type="text/javascript" src="index.js"></script>
