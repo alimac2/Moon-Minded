@@ -1,5 +1,18 @@
 "use strict"
 
+
+$(".nav-bar-create").click(function() {
+  $(".new-entry-page").removeClass("hidden");  
+});
+
+
+
+
+
+
+
+
+
 function submitEntryData() {    /* possibly rename */
     $(".submit-entry").click(function() {
         event.preventDefault();
