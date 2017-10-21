@@ -1,7 +1,7 @@
 "use strict"
 
 
-$(".nav-bar-create").click(function() {
+$(".nav-link-create").click(function() {
   $(".new-entry-page").removeClass("hidden");  
 });
 
