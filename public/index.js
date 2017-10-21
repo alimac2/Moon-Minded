@@ -37,7 +37,9 @@ function submitEntryData() {    /* possibly rename */
             contentType: "application/json", 
             success: function(data) {
                 console.log("POST request works"); /*Display data, call function to display data*/
-                /* create function maybbe. toggleclass or removeclass hidden to hide post form - show other section */
+                /* create function maybb. toggleclass or removeclass hidden to hide post form - show other section 
+                 
+                $(".new-entry-page").addClass("hidden");*/
             }
         });     
     });
