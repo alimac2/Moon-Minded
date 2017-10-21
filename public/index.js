@@ -23,7 +23,7 @@ function submitEntryData() {    /* possibly rename */
             data: JSON.stringify(entryDetails),
             contentType: "application/json", 
             success: function(data) {
-                console.log("function worked"); /*Display data, call function to display data*/
+                console.log("POST request works"); /*Display data, call function to display data*/
                 /* create function maybbe. toggleclass or removeclass hidden to hide post form - show other section */
             }
         });     
@@ -32,34 +32,65 @@ function submitEntryData() {    /* possibly rename */
 
 submitEntryData();
  
-function deleteEntry(entryDetails) { /*data*/
-    $(".delete-entry").click(function() {
-        event.preventDefault()
-    }); /*review - do you need event in the jquery event callback?*/
 
+function getEntries(callbackFn) {
     $.ajax({
-        method: "DELETE",
+        method: "GET",
         url: "/entries", 
         dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify(entryDetails),
+        data: entryDetails/* maybe entryDetails, DOUBLE CHECK */,
+        contentType: "application/json", 
         success: function(data) {
-            console.log("it works too");
+            console.log("GET request works");
         }
     });
 }
 
+function displayEntries(data) {
+    for (index in data) {
+        $("body").append(
+            "<div>" +
+                "<p>" + data[index].created + "</p>" +
+                "<p>" + data[index].title + "</p>" +
+            "</div>"
+        );  
+    }
+}
+
+function getAndDisplayEntries() {
+    getEntries(displayEntries);
+}
+
+$(function() {
+    getAndDisplayEntries();
+})
 
 
-// function getEntries(callbackFn) {
-//     $.ajax({
-//         method: "GET",
-//         url: "/entries", 
-//         dataType: "json",
-//         success: function(data) {},
-//         contentType: 
-//     });
-// }
+function deleteEntry() { /*entryId, data, or entryDetails*/
+    $(".delete-entry").click(function() {
+        event.preventDefault();
+        
+        const entryId = $(".class-name").val(); /* all delete buttons will have the same class, grabbed from DOM*/
+
+    }); /*review - do you need event in the jquery event callback?*/
+
+    $.ajax({
+        method: "DELETE",
+        url: "/entries/entryId", /* LOOK OVER */
+        dataType: "json",
+        contentType: "application/json",
+        // data: JSON.stringify(entryDetails),
+        success: function(data) {
+            console.log("DELETE request works");
+        }
+    });
+}
+
+deleteEntry();
+
+
+
+
 
 // function updateEntries(callbackFn) {
 //     $.ajax({
@@ -69,18 +100,3 @@ function deleteEntry(entryDetails) { /*data*/
 //         success: function(data) {},
 //     });
 // }
-
-// function displayEntries(data) {
-//     for (index in data.journalEntries) {
-//         $("body").append(
-//             "<p>" + data.journalEntries[index].content + "</p>");  
-//         }
-// }
-
-// function getAndDisplayEntries() {
-//     getEntries(displayEntries);
-// }
-
-// $(function() {
-//     getAndDisplayEntries();
-// })

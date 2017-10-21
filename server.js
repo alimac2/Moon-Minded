@@ -100,7 +100,7 @@ app.put("/entries/:id", (req, res) => {
 });
 
 
-app.delete('/entries/:id', (req, res) => {
+app.delete("/entries/:id", (req, res) => {
     Entry
     .findByIdAndRemove(req.params.id)
     .then(() => {
