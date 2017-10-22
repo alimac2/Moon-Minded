@@ -105,7 +105,7 @@ function deleteEntry() {
 //         method: "PUT",
 //         url: "/entries/", 
 //         dataType: "json",
-//         // data:
+//         // data: JSON.stringify(),
 //         success: function(data) {
 //             console.log("PUT request works");
 //         },
