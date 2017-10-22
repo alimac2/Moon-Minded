@@ -17,7 +17,7 @@ nav {
 	position: relative;
 }
 
-h1, .nav-logo {
+h1, h2, .nav-logo {
     font-family: 'Cinzel Decorative', cursive;
 }
 
@@ -45,8 +45,20 @@ li a {
 
 .nav-logo {
 	padding: 8px;
-	
+
 }
+
+.entries-display {
+	padding: 10px;
+	text-align: center;
+}
+
+.all-entries-title {
+	text-align: center;
+}
+
+
+
 
 
 
