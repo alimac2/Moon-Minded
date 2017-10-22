@@ -21,10 +21,11 @@ h1, h2, .nav-logo {
     font-family: 'Cinzel Decorative', cursive;
 }
 
-.form {
+.new-entry-page {
 	display: block;
-	/* position: absolute; */
 	text-align: center;
+	margin-left: auto;
+    margin-right: auto;
 }
 
 ul {
@@ -53,7 +54,7 @@ li a {
 	text-align: center;
 }
 
-.all-entries-title {
+.all-entries-title, .new-entry-title {
 	text-align: center;
 }
 
