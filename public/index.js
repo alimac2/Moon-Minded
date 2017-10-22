@@ -66,29 +66,27 @@ function displayEntries(data) {
     // console.log(data);
     // console.log(i);
         $(".all-entries").append(
-            `<dl class="entries-display">
-                <dt id="${data[i].id}"> 
+            `<div class="entries-display" id="${data[i].id}">
                 <button class="entry-btn edit-btn">Edit</button>
                 <button class="entry-btn delete-btn">Delete</button>
                 <span>${data[i].created}</span>
                 <span>${data[i].title}</span>
-                </dt>
-            </dl>`
+            </div>`
         );  /*added data.[i].id embedded expression */
     };
 };
 
 
 function deleteEntry() {
-    $(".delete-btn").click(function() {
+    $(".delete-btn").click(function(event) {
         event.preventDefault();
         
-        const entryId = $(this).prev("dt").attr("id"); 
-        console.log(entryId);
+        const entryId = $(this).prev("div").attr("id"); 
+        console.log(entryId); /*this is the issue*/
 
         $.ajax({
             method: "DELETE",
-            url: `/entries/${entryId}`, /* LOOK OVER */
+            url: "/entries/entryId", /* LOOK OVER */
             dataType: "json",
             contentType: "application/json",
             // data: JSON.stringify(entryDetails),
