@@ -28,7 +28,12 @@ function submitEntryData() {
             content: entryContent,
             created: entryDate
         };
-        
+        /* clear out form
+        tried entryDetails.val("");
+        need to try document.getElementById("").reset();
+        $(".class")[0].reset();
+        $(".class").trigger("reset");
+        */
         $.ajax({
             method: "POST",
             url: "/entries",
