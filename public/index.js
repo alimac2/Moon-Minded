@@ -66,14 +66,14 @@ function displayEntries(data) {
     // console.log(data);
     // console.log(i);
         $(".all-entries").append(
-            `<div class="entries-display">
+            `<dl class="entries-display">
                 <dt id="${data[i].id}"> 
                 <button class="entry-btn edit-btn">Edit</button>
                 <button class="entry-btn delete-btn">Delete</button>
                 <span>${data[i].created}</span>
                 <span>${data[i].title}</span>
                 </dt>
-            </div>`
+            </dl>`
         );  /*added data.[i].id embedded expression */
     };
 };
