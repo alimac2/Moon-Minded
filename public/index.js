@@ -3,8 +3,11 @@
 
 /* global variable called state. State is where you start off.  */
 
+
+/* ---- CLICK EVENTS TO HIDE AND SHOW PAGES --_- */
 $(".nav-link-create").click(function() {
   $(".new-entry-page").removeClass("hidden");  
+  $(".all-entries-page").addClass("hidden");
 });
 
 
@@ -76,12 +79,12 @@ function displayEntries(data) {
 };
 
 
-function deleteEntry(data) {
+function deleteEntry() {
     $(".delete-btn").click(function() {
         event.preventDefault();
-        console.log(entryId);
-
+        
         const entryId = $(this).data("id"); /* also $(this).attr("data-id"); */
+        console.log(entryId);
 
         $.ajax({
             method: "DELETE",
