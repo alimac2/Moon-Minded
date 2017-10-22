@@ -83,7 +83,7 @@ function deleteEntry() {
     $(".delete-btn").click(function() {
         event.preventDefault();
         
-        const entryId = $(this).prev("dt").attr("id"); /* also $(this).attr("data-id"); */
+        const entryId = $(this).prev("dt").attr("id"); 
         console.log(entryId);
 
         $.ajax({
