@@ -10,7 +10,7 @@ $(".nav-link-create").click(function() {
 
 
 
-function submitEntryData() {    /* possibly rename */
+function submitEntryData() {    
     $(".submit-entry").click(function() {
         event.preventDefault();
 
@@ -50,7 +50,7 @@ function getEntries() {
         dataType: "json",
         contentType: "application/json", 
         success: function(data) {
-            console.log(data);
+            // console.log(data);
             displayEntries(data);
             console.log("GET request works");
         }
@@ -60,37 +60,39 @@ function getEntries() {
 function displayEntries(data) {
 
     for (let i = 0; i < data.length; i++) {
-    console.log(data);
-    console.log(i);
+    // console.log(data);
+    // console.log(i);
         $(".all-entries").append(
             `<div class="entries-display">
+                <dt id="${data[i].id}"> 
                 <p>${data[i].created}</p>
                 <p>${data[i].title}</p>
+                </dt>
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
             </div>`
-        );  
+        );  /*added data.[i].id embedded expression */
     };
 };
 
 
-function deleteEntry() { /*entryId, data, or entryDetails*/
+function deleteEntry(data) {
     $(".delete-btn").click(function() {
         event.preventDefault();
-        
-        const entryId = $(".delete-btn").val();
+        console.log(entryId);
 
-    }); /*review - do you need event in the jquery event callback?*/
+        const entryId = $(this).data("data-id"); /* also $(this).attr("data-id"); */
 
-    $.ajax({
-        method: "DELETE",
-        url: "/entries/entryId", /* LOOK OVER */
-        dataType: "json",
-        contentType: "application/json",
-        // data: JSON.stringify(entryDetails),
-        success: function(data) {
-            console.log("DELETE request works");
-        }
+        $.ajax({
+            method: "DELETE",
+            url: `/entries/${entryId}`, /* LOOK OVER */
+            dataType: "json",
+            contentType: "application/json",
+            // data: JSON.stringify(entryDetails),
+            success: function(data) {
+                console.log("DELETE request works");
+            }
+        });
     });
 }
 
