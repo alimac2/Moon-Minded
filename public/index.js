@@ -65,11 +65,11 @@ function displayEntries(data) {
         $(".all-entries").append(
             `<div class="entries-display">
                 <dt id="${data[i].id}"> 
-                <p>${data[i].created}</p>
-                <p>${data[i].title}</p>
+                <button class="entry-btn edit-btn">Edit</button>
+                <button class="entry-btn delete-btn">Delete</button>
+                <span>${data[i].created}</span>
+                <span>${data[i].title}</span>
                 </dt>
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
             </div>`
         );  /*added data.[i].id embedded expression */
     };
