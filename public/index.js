@@ -83,7 +83,7 @@ function deleteEntry() {
     $(".delete-btn").click(function() {
         event.preventDefault();
         
-        const entryId = $(this).data("id"); /* also $(this).attr("data-id"); */
+        const entryId = $(this).closest("button").prev("dt").attr("id"); /* also $(this).attr("data-id"); */
         console.log(entryId);
 
         $.ajax({
@@ -105,7 +105,7 @@ function deleteEntry() {
 //         method: "PUT",
 //         url: "/entries/", 
 //         dataType: "json",
-//         data: entryDetails, /* make sure this is corerct */
+//         // data:
 //         success: function(data) {
 //             console.log("PUT request works");
 //         },
