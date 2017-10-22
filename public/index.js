@@ -64,8 +64,8 @@ function displayEntries(data) {
     console.log(i);
         $(".all-entries").append(
             `<div class="entries-display">
-                <p>data[i].created</p>
-                <p>data[i].title</p>
+                <p>${data[i].created}</p>
+                <p>${data[i].title}</p>
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
             </div>`
@@ -73,30 +73,26 @@ function displayEntries(data) {
     };
 };
 
-// function getAndDisplayEntries() {
-//     getEntries(displayEntries);
-// }
 
-
-// function deleteEntry() { /*entryId, data, or entryDetails*/
-//     $(".delete-entry").click(function() {
-//         event.preventDefault();
+function deleteEntry() { /*entryId, data, or entryDetails*/
+    $(".delete-btn").click(function() {
+        event.preventDefault();
         
-//         const entryId = $(".delete-btn").val(); /* all delete buttons will have the same class, grabbed from DOM*/
+        const entryId = $(".delete-btn").val();
 
-//     }); /*review - do you need event in the jquery event callback?*/
+    }); /*review - do you need event in the jquery event callback?*/
 
-//     $.ajax({
-//         method: "DELETE",
-//         url: "/entries/entryId", /* LOOK OVER */
-//         dataType: "json",
-//         contentType: "application/json",
-//         // data: JSON.stringify(entryDetails),
-//         success: function(data) {
-//             console.log("DELETE request works");
-//         }
-//     });
-// }
+    $.ajax({
+        method: "DELETE",
+        url: "/entries/entryId", /* LOOK OVER */
+        dataType: "json",
+        contentType: "application/json",
+        // data: JSON.stringify(entryDetails),
+        success: function(data) {
+            console.log("DELETE request works");
+        }
+    });
+}
 
 
 // function updateEntries(callbackFn) {
@@ -114,6 +110,6 @@ function displayEntries(data) {
 /* document ready*/
 $(function() {
 submitEntryData();
-// deleteEntry();
+deleteEntry();
 getEntries();
 });
