@@ -72,30 +72,9 @@ function displayEntries(data) {
                 <span>${data[i].created}</span>
                 <span>${data[i].title}</span>
             </div>`
-        );  /*added data.[i].id embedded expression */
+        );  
     };
 };
-
-
-function deleteEntry() {
-    $(".delete-btn").click(function(event) {
-        event.preventDefault();
-        
-        const entryId = $(this).prev("div").attr("id"); 
-        console.log(entryId); /*this is the issue*/
-
-        $.ajax({
-            method: "DELETE",
-            url: "/entries/entryId", /* LOOK OVER */
-            dataType: "json",
-            contentType: "application/json",
-            // data: JSON.stringify(entryDetails),
-            success: function(data) {
-                console.log("DELETE request works");
-            }
-        });
-    });
-}
 
 
 // function updateEntries(callbackFn) {
@@ -110,9 +89,25 @@ function deleteEntry() {
 //     });
 // }
 
-/* document ready*/
+/* document ready - when the page loads*/
 $(function() {
 submitEntryData();
-deleteEntry();
 getEntries();
+});
+
+$(document).on("click", ".delete-btn", function(event) {
+    event.preventDefault();
+    
+    const entryId = $(this).parent().attr("id"); 
+    console.log(entryId); /*this is the issue*/
+
+    $.ajax({
+        method: "DELETE",
+        url: "/entries/" + entryId, /* LOOK OVER */
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data) {
+            console.log("DELETE request works");
+        } /* make API call to refresh page after delete*/
+    });
 });
