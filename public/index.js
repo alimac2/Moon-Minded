@@ -81,7 +81,7 @@ function deleteEntry(data) {
         event.preventDefault();
         console.log(entryId);
 
-        const entryId = $(this).data("data-id"); /* also $(this).attr("data-id"); */
+        const entryId = $(this).data("id"); /* also $(this).attr("data-id"); */
 
         $.ajax({
             method: "DELETE",
