@@ -42,7 +42,7 @@ function submitEntryData() {
             contentType: "application/json", 
             success: function(data) {
                 console.log("POST request works"); /*Display data, call function to display data*/
-                /* create function maybb. toggleclass or removeclass hidden to hide post form - show other section 
+                /* create function - maybe. 
                  
                 $(".new-entry-page").addClass("hidden");*/
             }
@@ -82,17 +82,18 @@ function displayEntries(data) {
 };
 
 
-// function updateEntries(callbackFn) {
-//     $.ajax({
-//         method: "PUT",
-//         url: "/entries/", 
-//         dataType: "json",
-//         // data: JSON.stringify(),
-//         success: function(data) {
-//             console.log("PUT request works");
-//         },
-//     });
-// }
+function updateEntries(callbackFn) {
+    $.ajax({
+        method: "PUT",
+        url: "/entries/", /* + entryId possibly */
+        dataType: "json",
+        /* data: JSON.stringify(),     may want to pass in data object*/
+        success: function(data) {
+            console.log("PUT request works");
+            /* should take user back to new entry view but with fields filled in */
+        },
+    });
+}
 
 /* document ready - when the page loads*/
 $(function() {
@@ -104,11 +105,11 @@ $(document).on("click", ".delete-btn", function(event) {
     event.preventDefault();
     
     const entryId = $(this).parent().attr("id"); 
-    console.log(entryId); /*this is the issue*/
+    console.log(entryId); 
 
     $.ajax({
         method: "DELETE",
-        url: "/entries/" + entryId, /* LOOK OVER */
+        url: "/entries/" + entryId,
         dataType: "json",
         contentType: "application/json",
         success: function(data) {
