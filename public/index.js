@@ -82,18 +82,18 @@ function displayEntries(data) {
 };
 
 
-function updateEntries(callbackFn) {
-    $.ajax({
-        method: "PUT",
-        url: "/entries/", /* + entryId possibly */
-        dataType: "json",
-        /* data: JSON.stringify(),     may want to pass in data object*/
-        success: function(data) {
-            console.log("PUT request works");
-            /* should take user back to new entry view but with fields filled in */
-        },
-    });
-}
+// function updateEntries(callbackFn) {
+//     $.ajax({
+//         method: "PUT",
+//         url: "/entries/", /* + entryId possibly */
+//         dataType: "json",
+//         /* data: JSON.stringify(),     may want to pass in data object*/
+//         success: function(data) {
+//             console.log("PUT request works");
+//             /* should take user back to new entry view but with fields filled in */
+//         },
+//     });
+// }
 
 /* document ready - when the page loads*/
 $(function() {
@@ -101,7 +101,7 @@ submitEntryData();
 getEntries();
 });
 
-$(document).on("click", ".delete-btn", function(event) {
+$(".all-entries").on("click", ".delete-btn", function(event) {
     event.preventDefault();
     
     const entryId = $(this).parent().attr("id"); 
@@ -113,6 +113,9 @@ $(document).on("click", ".delete-btn", function(event) {
         dataType: "json",
         contentType: "application/json",
         success: function(data) {
+            getEntries();
+            /*want to remove deleted entry*/
+            /*keep existing entries visible on page */
             console.log("DELETE request works");
         } /* make API call to refresh page after delete*/
     });
