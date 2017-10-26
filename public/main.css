@@ -76,6 +76,9 @@ li a {
 .entries-display {
 	padding: 10px;
 	text-align: center;
+	color: white;
+	text-shadow: 1px 1px #0a1612;
+
 }
 
 .all-entries-title, .new-entry-title {
