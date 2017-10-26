@@ -29,7 +29,7 @@ function submitEntryData() {
             created: entryDate
         };
         /* clear out form
-        tried entryDetails.val("");
+        tried entryDetails.val(""); .empty(LOOK UP)
         need to try document.getElementById("").reset();
         $(".class")[0].reset();
         $(".class").trigger("reset");
@@ -52,16 +52,21 @@ function submitEntryData() {
 
 
 function getEntries() {
-    $.ajax({
-        method: "GET",
-        url: "/entries", 
-        dataType: "json",
-        contentType: "application/json", 
-        success: function(data) {
-            // console.log(data);
-            displayEntries(data);
-            console.log("GET request works");
-        }
+    $(".nav-link-all").click(function() {
+        event.preventDefault();
+
+
+        $.ajax({
+            method: "GET",
+            url: "/entries", 
+            dataType: "json",
+            contentType: "application/json", 
+            success: function(data) {
+                // console.log(data);
+                displayEntries(data);
+                console.log("GET request works");
+            }
+        });
     });
 };
 
@@ -70,7 +75,10 @@ function displayEntries(data) {
     for (let i = 0; i < data.length; i++) {
     // console.log(data);
     // console.log(i);
-        $(".all-entries").append(
+        $(".all-entries-title").removeClass("hidden");
+        $(".main-title").addClass("hidden");
+        $(".about").addClass("hidden")
+        $(".all-entries-page").append(
             `<div class="entries-display" id="${data[i].id}">
                 <button class="entry-btn edit-btn">Edit</button>
                 <button class="entry-btn delete-btn">Delete</button>
@@ -95,11 +103,6 @@ function displayEntries(data) {
 //     });
 // }
 
-/* document ready - when the page loads*/
-$(function() {
-submitEntryData();
-getEntries();
-});
 
 $(".all-entries").on("click", ".delete-btn", function(event) {
     event.preventDefault();
@@ -119,4 +122,11 @@ $(".all-entries").on("click", ".delete-btn", function(event) {
             console.log("DELETE request works");
         } /* make API call to refresh page after delete*/
     });
+});
+
+
+/* document ready - when the page loads*/
+$(function() {
+    submitEntryData();
+    getEntries();
 });

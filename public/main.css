@@ -11,15 +11,34 @@ body {
 	margin: 0;
 	width: 100%;
 	height: 100%;
+	background-image: url(stas-ovsky-359846.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
+
+
 
 nav {
 	height: 60px;
 	position: relative;
 }
 
+.navbar {
+	width: 100%;
+	height: 40px;
+	background: #464651;
+	cursor: point;
+}
+
+.navb a {
+	text-decoration: none;
+	padding: 12px 10px;	
+} 
+
 h1, h2, .nav-logo {
-    font-family: 'Cinzel Decorative', cursive;
+	font-family: 'Cinzel Decorative', cursive;
+	color:#f7ce3e;
 }
 
 .new-entry-page {
@@ -33,7 +52,8 @@ ul {
 	list-style-type: none;
 	margin: 0;
     padding: 0;
-    overflow: hidden;
+	overflow: hidden;
+
 }
 
 li {
@@ -42,11 +62,12 @@ li {
 
 li a {
 	display: block;
-    padding: 8px;
+	padding: 8px;
+	text-decoration: none;
 }
 
 .nav-logo {
-	padding: 8px;
+	padding: 12px;
 
 }
 
@@ -57,6 +78,19 @@ li a {
 
 .all-entries-title, .new-entry-title {
 	text-align: center;
+}
+
+footer {
+	text-align: center;
+	position: absolute;
+	bottom:0;
+	width:100%;
+	background:#0a1612;
+}
+
+
+.about, .by {
+	color: 	#c5c1c0;
 }
 
 .hidden {
