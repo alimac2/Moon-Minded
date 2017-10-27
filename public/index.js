@@ -78,7 +78,7 @@ function displayEntries(data) {
         $(".all-entries-title").removeClass("hidden");
         $(".main-title").addClass("hidden");
         $(".about").addClass("hidden")
-        $(".all-entries-page").append(
+        $(".all-entries").append(
             `<div class="entries-display" id="${data[i].id}">
                 <button class="entry-btn edit-btn">Edit</button>
                 <button class="entry-btn delete-btn">Delete</button>
@@ -91,23 +91,40 @@ function displayEntries(data) {
 
 
 // function updateEntries(callbackFn) {
-// $(".all-entries").on("click", ".edit-btn", function(event) {
-//     event.preventDefault();
+$(".all-entries-page").on("click", ".edit-btn", function(event) {
+    event.preventDefault();
+    $(".all-entries").addClass("hidden");
+    $(".new-entry-page").removeClass("hidden");
+    /*when user click edit button, the app takes user to edit entry page  with all fields from new entry but with existing data. So they can make change to the data they want to make changes to. Create a save button for user to save changes. Populate data in form*/
 
-//     const entryId = $(this).parent().attr("id"); 
-//     console.log(entryId); 
+    const entryTitle = $(".entry-title").val();
+    const eventType = $(".event-type").val();
+    const entryContent = $(".content").val();
+    const entryDate = $(".date-created").val();
     
-//     $.ajax({
-//         method: "PUT",
-//         url: "/entries/" + entryId,
-//         dataType: "json",
-//         /* data: JSON.stringify(),     may want to pass in data object*/
-//         success: function(data) {
-//             console.log("PUT request works");
-//             /* should take user back to new entry view but with fields filled in */
-//         }
-//     });
-// });
+    const updatedEntry =  {
+        title: entryTitle,
+        eventType: eventType,
+        content: entryContent,
+        created: entryDate
+    };
+    console.log(updatedEntry);
+
+    const entryId = $(this).parent().attr("id"); 
+    console.log(entryId); 
+    
+    $.ajax({
+        method: "PUT",
+        url: "/entries/" + entryId, /*double check if entryId is needed*/
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(updatedEntry),     /*may want to pass in data object*/
+        success: function(data) {
+            console.log("PUT request works");
+            /* should take user back to new entry view but with fields filled in */
+        }
+    });
+});
 
 
 $(".all-entries").on("click", ".delete-btn", function(event) {
@@ -122,11 +139,12 @@ $(".all-entries").on("click", ".delete-btn", function(event) {
         dataType: "json",
         contentType: "application/json",
         success: function(data) {
-            // getEntries();
+            getEntries();
             /*want to remove deleted entry*/
             /*keep existing entries visible on page */
+            /* make API call to refresh page after delete*/
             console.log("DELETE request works");
-        } /* make API call to refresh page after delete*/
+        } 
     });
 });
 
