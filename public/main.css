@@ -67,6 +67,11 @@ li a {
 	display: block;
 	padding: 8px;
 	text-decoration: none;
+	color:#c5c1c0;
+}
+
+a:hover {
+	color: white;
 }
 
 .nav-logo {
@@ -94,7 +99,11 @@ footer {
 }
 
 
-.about, .by {
+.about {
+	color: white;
+}
+
+.by {
 	color: 	#c5c1c0;
 }
 

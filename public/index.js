@@ -95,8 +95,16 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
     event.preventDefault();
     $(".all-entries").addClass("hidden");
     $(".new-entry-page").removeClass("hidden");
-    /*when user click edit button, the app takes user to edit entry page  with all fields from new entry but with existing data. So they can make change to the data they want to make changes to. Create a save button for user to save changes. Populate data in form*/
+    /*when user click edit button, the app takes user tom modal.  (div class=modal) with all fields from new entry but with existing data. So they can make change to the data they want to make changes to. Create a save button for user to save changes. Populate data in form*/
 
+/* hit edit button*/
+/*modal pops up with update entry form*/
+/* enter values into right input areas*/
+/*user hits save button, values are stored in a new entry object*/
+
+
+
+    /* change classes based on update form*/
     const entryTitle = $(".entry-title").val();
     const eventType = $(".event-type").val();
     const entryContent = $(".content").val();
