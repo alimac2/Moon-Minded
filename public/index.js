@@ -91,17 +91,23 @@ function displayEntries(data) {
 
 
 // function updateEntries(callbackFn) {
+// $(".all-entries").on("click", ".edit-btn", function(event) {
+//     event.preventDefault();
+
+//     const entryId = $(this).parent().attr("id"); 
+//     console.log(entryId); 
+    
 //     $.ajax({
 //         method: "PUT",
-//         url: "/entries/", /* + entryId possibly */
+//         url: "/entries/" + entryId,
 //         dataType: "json",
 //         /* data: JSON.stringify(),     may want to pass in data object*/
 //         success: function(data) {
 //             console.log("PUT request works");
 //             /* should take user back to new entry view but with fields filled in */
-//         },
+//         }
 //     });
-// }
+// });
 
 
 $(".all-entries").on("click", ".delete-btn", function(event) {
@@ -116,7 +122,7 @@ $(".all-entries").on("click", ".delete-btn", function(event) {
         dataType: "json",
         contentType: "application/json",
         success: function(data) {
-            getEntries();
+            // getEntries();
             /*want to remove deleted entry*/
             /*keep existing entries visible on page */
             console.log("DELETE request works");
