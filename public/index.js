@@ -95,13 +95,14 @@ function displayEntries(data) {
 
 $(".all-entries-page").on("click", ".edit-btn", function(event) {
     event.preventDefault();
-    $(".all-entries").addClass("hidden");
-    $(".new-entry-page").removeClass("hidden");
+    
 
+
+    $(".all-entries-page").addClass("hidden");
+    $(".new-entry-page").addClass("hidden");
     $(".edit-entry-display").html(
-        `<div class="modal-inner">
+        `<form class="edit-entry-form">
             <h2>Edit Entry</h2>
-            <a id="close-feedback-modal" class="popup-close" data-popup-close="popup-feedback">X</a>
             <input class="edit-entry-title" type="text" placeholder="Entry Title">
             <br>
             <label>Event Type</label>
@@ -124,8 +125,8 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
             <input class="edit-date-created" id="datetime" type="datetime-local">
             <br>
             <button class="submit-entry" name="save-btn" type="submit">Save Changes</button>	
-        </div>`
-    )	
+        </form>`
+    );	
 
 
     /*when user click edit button, the app takes user to modal.  (div class=modal) with all fields from new entry but with existing data. So they can make change to the data they want to make changes to. Create a save button for user to save changes. Populate data in form*/
@@ -152,7 +153,7 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
     console.log(updatedEntry);
 
     const entryId = $(this).parent().attr("id"); 
-    console.log(entryId); 
+    console.log(entryId);  
     
     $.ajax({
         method: "PUT",
