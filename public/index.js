@@ -91,11 +91,44 @@ function displayEntries(data) {
 
 
 // function updateEntries(callbackFn) {
+
+
 $(".all-entries-page").on("click", ".edit-btn", function(event) {
     event.preventDefault();
     $(".all-entries").addClass("hidden");
     $(".new-entry-page").removeClass("hidden");
-    /*when user click edit button, the app takes user tom modal.  (div class=modal) with all fields from new entry but with existing data. So they can make change to the data they want to make changes to. Create a save button for user to save changes. Populate data in form*/
+
+    $(".edit-entry-display").html(
+        `<div class="modal-inner">
+            <h2>Edit Entry</h2>
+            <a id="close-feedback-modal" class="popup-close" data-popup-close="popup-feedback">X</a>
+            <input class="edit-entry-title" type="text" placeholder="Entry Title">
+            <br>
+            <label>Event Type</label>
+            <br>
+            <select class="edit-event-type">
+                <option value="moon">moon</option>
+                <option value="stargazing">stargazing</option>
+                <option value="constellations">constellations</option>
+                <option value="meteor-shower">meteor shower</option>
+                <option value="milky-way">milky way</option>
+                <option value="planets">planets</option>
+                <option value="solar-eclipse">solar eclipse</option>
+                <option value="lunar-eclipse">lunar eclipse</option>
+            </select>
+            <br>
+            <textarea class="edit-content"></textarea>
+            <br>
+            <label>Entry Date and Time</label>
+            <br>
+            <input class="edit-date-created" id="datetime" type="datetime-local">
+            <br>
+            <button class="submit-entry" name="save-btn" type="submit">Save Changes</button>	
+        </div>`
+    )	
+
+
+    /*when user click edit button, the app takes user to modal.  (div class=modal) with all fields from new entry but with existing data. So they can make change to the data they want to make changes to. Create a save button for user to save changes. Populate data in form*/
 
 /* hit edit button*/
 /*modal pops up with update entry form*/
@@ -105,10 +138,10 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
 
 
     /* change classes based on update form*/
-    const entryTitle = $(".entry-title").val();
-    const eventType = $(".event-type").val();
-    const entryContent = $(".content").val();
-    const entryDate = $(".date-created").val();
+    const entryTitle = $(".edit-entry-title").val();
+    const eventType = $(".edit-event-type").val();
+    const entryContent = $(".edit-content").val();
+    const entryDate = $(".edit-date-created").val();
     
     const updatedEntry =  {
         title: entryTitle,
