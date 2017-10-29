@@ -136,10 +136,9 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
     const entryId = $(this).parent().attr("id"); 
     console.log(entryId); 
 
-    getEntriesDataById(entryId);
+    // getEntriesDataById(entryId);
 
     /*click on all entries and click on edit it calls get data entries*/
-
     
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
@@ -147,6 +146,7 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
         `<form class="edit-entry-form">
             <h2>Edit Entry</h2>
             <input class="edit-entry-title" type="text" placeholder="Entry Title">
+            <input class="edit-entry-id" type="hidden" value="${entryId}">
             <br>
             <label>Event Type</label>
             <br>
@@ -167,33 +167,42 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
             <br>
             <input class="edit-date-created" id="datetime" type="datetime-local">
             <br>
-            <button class="submit-entry" name="save-btn" type="submit">Save Changes</button>	
+            <button class="save-entry" name="save-btn" type="submit">Save Changes</button>	
         </form>`
     );
 
     /* existing data populates in edit entry form*/
     /* suer can edit fields with new information*/
-    /*user hits save button, values are stored in a new entry object*/
+    /*user hits save button, values are stored in a new entry object*/ 
+});    
 
+$(document).on("submit",".edit-entry-form", function(event) {
+    event.preventDefault();
+    $(".edit-entry-page").addClass("hidden");
+    $(".all-entries-page").removeClass("hidden");
+
+    const updatedEntryId = $(".edit-entry-id").val();
     const entryTitle = $(".edit-entry-title").val();
     const eventType = $(".edit-event-type").val();
     const entryContent = $(".edit-content").val();
     const entryDate = $(".edit-date-created").val();
     
     const updatedEntry =  {
-        id: entryId,
+        id: updatedEntryId,
         title: entryTitle,
         eventType: eventType,
         content: entryContent,
         created: entryDate
     };
     console.log(updatedEntry);
-});    
+    editEntry(updatedEntry);
+}); 
 
-function editEntry() {  
+
+function editEntry(updatedEntry) {  
     $.ajax({
         method: "PUT",
-        url: "/entries/" + entryId, 
+        url: "/entries/" + updatedEntry.id, 
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(updatedEntry),
@@ -202,6 +211,9 @@ function editEntry() {
             console.log(data);
             getEntriesData();
             /* should take user back to all-entries page with updated entry */
+        },
+        error: function (textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
         }
     });
 };
