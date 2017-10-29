@@ -197,7 +197,7 @@ function editEntry() {
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(updatedEntry),
-        success: function(data) {
+        success: function(data)  {
             console.log("PUT request works");
             console.log(data);
             getEntriesData();
