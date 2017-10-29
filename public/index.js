@@ -148,12 +148,15 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
     
     $.ajax({
         method: "PUT",
-        url: "/entries/", /*double check if entryId is needed*/
+        url: "/entries/" + entryId, /*double check if entryId is needed*/
+        // crossdomain: true,
+        // headers: {"Access-Control-Allow-Origin": "*"},
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(updatedEntry),
         success: function(data) {
             console.log("PUT request works");
+            console.log(data);
             displayEntries(data);
             /* should take user back to all-entries page with updated entry */
         }
