@@ -70,15 +70,7 @@ app.post("/entries", (req, res) => {
 });
      
 
-app.put("/entries/:id", (req, res) => {
-        // ensure that the id in the request path and the one in request body match
-    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-        const message = (
-            `Request path id (${req.params.id}) and request body id ` +
-            `(${req.body.id}) must match`);
-          console.error(message);
-          res.status(400).json({error: message});
-    }
+  
       
     // we only support a subset of fields being updateable.
     // if the user sent over any of the updatableFields, we udpate those values
