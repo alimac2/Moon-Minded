@@ -8,6 +8,7 @@
 $(".nav-link-create").click(function() {
   $(".new-entry-page").removeClass("hidden");  
   $(".all-entries-page").addClass("hidden");
+  $(".landing-page").addClass("hidden");
 });
 
 
