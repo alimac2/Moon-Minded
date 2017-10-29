@@ -94,11 +94,13 @@ function displayEntries(data) {
 
 $(".all-entries-page").on("click", ".edit-btn", function(event) {
     event.preventDefault();
+    const entryId = $(this).parent().attr("id"); 
+    console.log(entryId); 
     
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
     $(".edit-entry-display").html(
-        `<form class="edit-entry-form">
+        `<form class="edit-entry-form" id="${entryId}">
             <h2>Edit Entry</h2>
             <input class="edit-entry-title" type="text" placeholder="Entry Title">
             <br>
@@ -129,9 +131,7 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
     /* suer can edit fields with new information*/
     /*user hits save button, values are stored in a new entry object*/
 
-    /* change classes based on update form*/
-    const entryId = $(this).parent().attr("id"); 
-    console.log(entryId); 
+
 
     const entryTitle = $(".edit-entry-title").val();
     const eventType = $(".edit-event-type").val();
@@ -148,10 +148,10 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
     
     $.ajax({
         method: "PUT",
-        url: "/entries/" + entryId, /*double check if entryId is needed*/
+        url: "/entries/" + entryId, 
         // crossdomain: true,
         // headers: {"Access-Control-Allow-Origin": "*"},
-        contentType: "application/json",
+        contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(updatedEntry),
         success: function(data) {
