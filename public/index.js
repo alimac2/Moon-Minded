@@ -28,6 +28,8 @@ function submitEntryData() {
             content: entryContent,
             created: entryDate
         };
+        console.log(entryDetails);
+        
         /* clear out form
         tried entryDetails.val(""); .empty(LOOK UP)
         need to try document.getElementById("").reset();
@@ -46,6 +48,7 @@ function submitEntryData() {
                  
                 $(".new-entry-page").addClass("hidden");*/
             }
+            
         });     
     });
 };
@@ -79,7 +82,7 @@ function displayEntries(data) {
         $(".main-title").addClass("hidden");
         $(".about").addClass("hidden")
         $(".all-entries").append(
-            `<div class="entries-display" id="${data[i].id}">
+            `<div class="entry-display" id="${data[i].id}">
                 <button class="entry-btn edit-btn">Edit</button>
                 <button class="entry-btn delete-btn">Delete</button>
                 <span>${data[i].created}</span>
@@ -90,14 +93,9 @@ function displayEntries(data) {
 };
 
 
-// function updateEntries(callbackFn) {
-
-
 $(".all-entries-page").on("click", ".edit-btn", function(event) {
     event.preventDefault();
     
-
-
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
     $(".edit-entry-display").html(
@@ -115,7 +113,7 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
                 <option value="milky-way">milky way</option>
                 <option value="planets">planets</option>
                 <option value="solar-eclipse">solar eclipse</option>
-                <option value="lunar-eclipse">lunar eclipse</option>
+                    <option value="lunar-eclipse">lunar eclipse</option>
             </select>
             <br>
             <textarea class="edit-content"></textarea>
@@ -126,19 +124,21 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
             <br>
             <button class="submit-entry" name="save-btn" type="submit">Save Changes</button>	
         </form>`
-    );	
+    );
+
 
 
     /*when user click edit button, the app takes user to modal.  (div class=modal) with all fields from new entry but with existing data. So they can make change to the data they want to make changes to. Create a save button for user to save changes. Populate data in form*/
 
-/* hit edit button*/
-/*modal pops up with update entry form*/
-/* enter values into right input areas*/
-/*user hits save button, values are stored in a new entry object*/
-
-
+    /* hit edit button*/
+    /*modal pops up with update entry form*/
+    /* enter values into right input areas*/
+    /*user hits save button, values are stored in a new entry object*/
 
     /* change classes based on update form*/
+    const entryId = $(this).parent().attr("id"); 
+    console.log(entryId); 
+
     const entryTitle = $(".edit-entry-title").val();
     const eventType = $(".edit-event-type").val();
     const entryContent = $(".edit-content").val();
@@ -152,12 +152,11 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
     };
     console.log(updatedEntry);
 
-    const entryId = $(this).parent().attr("id"); 
-    console.log(entryId);  
+ 
     
     $.ajax({
         method: "PUT",
-        url: "/entries/" + entryId, /*double check if entryId is needed*/
+        url: "/entries/", /*double check if entryId is needed*/
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(updatedEntry),     /*may want to pass in data object*/
@@ -167,6 +166,7 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
         }
     });
 });
+
 
 
 $(".all-entries").on("click", ".delete-btn", function(event) {
