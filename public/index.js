@@ -74,7 +74,6 @@ function getEntries() {
 };
 
 function displayEntries(data) {
-
     for (let i = 0; i < data.length; i++) {
     // console.log(data);
     // console.log(i);
@@ -126,13 +125,8 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
         </form>`
     );
 
-
-
-    /*when user click edit button, the app takes user to modal.  (div class=modal) with all fields from new entry but with existing data. So they can make change to the data they want to make changes to. Create a save button for user to save changes. Populate data in form*/
-
-    /* hit edit button*/
-    /*modal pops up with update entry form*/
-    /* enter values into right input areas*/
+    /* existing data populates in edit entry form*/
+    /* suer can edit fields with new information*/
     /*user hits save button, values are stored in a new entry object*/
 
     /* change classes based on update form*/
@@ -151,18 +145,17 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
         created: entryDate
     };
     console.log(updatedEntry);
-
- 
     
     $.ajax({
         method: "PUT",
         url: "/entries/", /*double check if entryId is needed*/
         contentType: "application/json",
         dataType: "json",
-        data: JSON.stringify(updatedEntry),     /*may want to pass in data object*/
+        data: JSON.stringify(updatedEntry),
         success: function(data) {
             console.log("PUT request works");
-            /* should take user back to new entry view but with fields filled in */
+            displayEntries(data);
+            /* should take user back to all-entries page with updated entry */
         }
     });
 });
