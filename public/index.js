@@ -54,7 +54,7 @@ function submitEntryData() {
 };
 
 
-function getEntries() {
+function getAndDisplayEntries() {
     $(".nav-link-all").click(function() {
         event.preventDefault();
 
@@ -157,7 +157,7 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
         success: function(data) {
             console.log("PUT request works");
             console.log(data);
-            displayEntries(data);
+            getAndDisplayEntries(data);
             /* should take user back to all-entries page with updated entry */
         }
     });
@@ -177,7 +177,7 @@ $(".all-entries").on("click", ".delete-btn", function(event) {
         dataType: "json",
         contentType: "application/json",
         success: function(data) {
-            getEntries();
+            getAndDisplayEntries();
             /*want to remove deleted entry*/
             /*keep existing entries visible on page */
             /* make API call to refresh page after delete*/
@@ -190,5 +190,5 @@ $(".all-entries").on("click", ".delete-btn", function(event) {
 /* document ready - when the page loads*/
 $(function() {
     submitEntryData();
-    getEntries();
+    getAndDisplayEntries();
 });
