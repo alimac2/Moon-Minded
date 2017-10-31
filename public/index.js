@@ -3,7 +3,6 @@
 
 /* global variable called state. State is where you start off.  */
 
-
 function submitEntryData() {  
       /* ---- CLICK EVENTS TO HIDE AND SHOW PAGES --- */
     $(".nav-link-create").click(function() {
@@ -93,6 +92,8 @@ function getEntriesDataById() {
 };
 
 function displayEntries(data) {
+    $(".all-entries").empty();
+
     for (let i = 0; i < data.length; i++) {
     // console.log(data);
     // console.log(i);
@@ -103,43 +104,39 @@ function displayEntries(data) {
             `<div class="entry-display" id="${data[i].id}">
                 <button class="entry-btn edit-btn">Edit</button>
                 <button class="entry-btn delete-btn">Delete</button>
-                <span>${data[i].created}</span>
-                <span>${data[i].title}</span>
+                <span class="entry-title">${data[i].title}</span>
+                <span class="date-created">${data[i].created}</span>
+                <span class="event-type">${data[i].eventType}</span>
+                <span class="content">${data[i].content}</span>
             </div>`
         );  
     };
 };
 
-// function displayPutEntries(data) {
-//     for (let i = 0; i < data.length; i++) {
-//     // console.log(data);
-//     // console.log(i);
-//         $(".all-entries-title").removeClass("hidden");
-//         $(".main-title").addClass("hidden");
-//         $(".about").addClass("hidden")
-//         $(".all-entries").append(
-//             `<div class="entry-display" id="${data[i].id}">
-//                 <button class="entry-btn edit-btn">Edit</button>
-//                 <button class="entry-btn delete-btn">Delete</button>
-//                 <span>${data[i].created}</span>
-//                 <span>${data[i].title}</span>
-//             </div>`
-//         );  
-//     };
-// };
-/*populate edit entry div with edited info */
+function editEntryData(data) {
+    $(".all-entries-page").on("click", ".edit-btn", function(event) {
+        event.preventDefault();
+        
+        const entryId = $(this).parent().attr("id"); 
+        console.log(entryId); 
+
+        const entryTitle = $(".entry-title").val(data.title);
+        const eventType = $(".event-type").val();
+        const entryContent = $(".content").val();
+        const entryDate = $(".date-created").val();
+
+        console.log(entryTitle);
+        console.log(eventType);
+        console.log(entryContent);
+        console.log(entryDate);
+
+        displayEditEntryForm(entryId);
+    });
+};
+/* will need to return values and pass them all somehow*/
 
 
-$(".all-entries-page").on("click", ".edit-btn", function(event) {
-    event.preventDefault();
-    
-    const entryId = $(this).parent().attr("id"); 
-    console.log(entryId); 
-
-    // getEntriesDataById(entryId);
-
-    /*click on all entries and click on edit it calls get data entries*/
-    
+function displayEditEntryForm(entryId) {  
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
     $(".edit-entry-display").html(
@@ -170,10 +167,7 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
             <button class="save-entry" name="save-btn" type="submit">Save Changes</button>	
         </form>`
     );
-
-    /* existing data populates in edit entry form*/
-    /*user hits save button, values are stored in a new entry object*/ 
-});    
+};    
 
 $(document).on("submit",".edit-entry-form", function(event) {
     event.preventDefault();
@@ -196,7 +190,7 @@ $(document).on("submit",".edit-entry-form", function(event) {
     console.log(updatedEntry);
     editEntry(updatedEntry);
 }); 
-
+/* look at editEntry - same idea for click edit btn*/
 
 function editEntry(updatedEntry) {  
     $.ajax({
@@ -216,9 +210,6 @@ function editEntry(updatedEntry) {
         }
     });
 };
-
-
-
 
 
 function deleteEntry(){
@@ -251,4 +242,5 @@ $(function() {
     submitEntryData();
     clickGetAndDisplayEntries();
     deleteEntry();
+    editEntryData();
 });
