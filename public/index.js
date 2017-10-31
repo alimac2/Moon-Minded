@@ -172,7 +172,6 @@ $(".all-entries-page").on("click", ".edit-btn", function(event) {
     );
 
     /* existing data populates in edit entry form*/
-    /* suer can edit fields with new information*/
     /*user hits save button, values are stored in a new entry object*/ 
 });    
 
@@ -217,6 +216,9 @@ function editEntry(updatedEntry) {
         }
     });
 };
+
+
+
 
 
 function deleteEntry(){
