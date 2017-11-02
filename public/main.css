@@ -67,7 +67,7 @@ li {
     float: left;
 }
 
-li a {
+.nav-link {
 	display: block;
 	padding: 8px;
 	text-decoration: none;
@@ -80,6 +80,10 @@ a:hover {
 
 .nav-logo {
 	padding: 12px;
+}
+
+.nav-logo-click {
+	color:#f7ce3e;
 }
 
 .entry-display {
@@ -120,7 +124,21 @@ footer {
 }
 
 
+.card {
+    /* width: 100%;
+    height: 100%; */
+    /* position: absolute; */
+    /* top: 0;
+    left: 0; */
+    background: rgba(150, 146, 146, 0.3);
+	z-index: -1;
+	border-radius: 5px;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%;
 
+}
 
   
 

@@ -19,10 +19,10 @@
         <!-- NAV BAR AFTER LOGIN-->
         <nav role="navbar-entries">
             <ul class="navbar">
-                <li class="nav-logo navb"><span>Moon Minded</span></li>
-                <li class="nav-link-all navb"><a href="">All Entries</a></li>
-                <li class="nav-link-create navb"><a href="">Create New Entry</a></li>
-                <li class="nav-link-logout navb"><a href="">Logout</a></li>
+                <li class="nav-logo navb"><a href="" class="nav-logo-click"><span>Moon Minded</span></a></li>
+                <li class="nav-link-all navb"><a href="" class="nav-link">All Entries</a></li>
+                <li class="nav-link-create navb"><a href="" class="nav-link">Create New Entry</a></li>
+                <!-- <li class="nav-link-logout navb"><a href="">Logout</a></li> -->
             </ul>
         </nav>
 
@@ -52,7 +52,7 @@
         </main>
 
             <!-- NEW ENTRY PAGE -->
-            <section class="new-entry-page hidden">
+            <section class="new-entry-page hidden card">
                     <h2 class="new-entry-title">New Entry</h2>
                     <form class="entry-details">
                         <input class="entry-title" type="text" placeholder="Entry Title">
@@ -81,13 +81,13 @@
                 </section>
 
             <!-- ALL ENTRIES PAGE  -->
-            <section class="all-entries-page hidden">
+            <section class="all-entries-page hidden card">
               <h2 class="all-entries-title">All Entries</h2>
               <div class="all-entries"></div>  
             </section>
 
             <!-- EDIT ENTRY PAGE -->
-            <section class="edit-entry-page">
+            <section class="edit-entry-page hidden card">
                 <div class="edit-entry-display"></div>
             </section>
             
