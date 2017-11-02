@@ -9,7 +9,7 @@ function submitEntryData() {
         event.preventDefault();
         $(".new-entry-page").removeClass("hidden");
         $(".all-entries-page").addClass("hidden");
-        $(".landing-page").hide();
+        $(".landing-page").addClass("hidden");
     });
     
     $(".submit-entry").click(function() {
@@ -57,6 +57,7 @@ function clickGetAndDisplayEntries() {
         event.preventDefault();
         $(".all-entries-page").removeClass("hidden");
         $(".new-entry-page").addClass("hidden");
+        $(".landing-page").addClass("hidden");
         getEntriesData();
     });
 };
@@ -102,12 +103,16 @@ function displayEntries(data) {
         $(".about").addClass("hidden")
         $(".all-entries").append(
             `<div class="entry-display" id="${data[i].id}">
+                <span class="entry-title display-title">${data[i].title}</span>
+                <br>
+                <span class="date-created">${data[i].created}</span>
+                <br>
+                <span class="event-type">${data[i].eventType}</span>
+                <br>
+                <span class="content">${data[i].content}</span>
+                <br>
                 <button class="entry-btn edit-btn">Edit</button>
                 <button class="entry-btn delete-btn">Delete</button>
-                <span class="entry-title">${data[i].title}</span>
-                <span class="date-created">${data[i].created}</span>
-                <span class="event-type">${data[i].eventType}</span>
-                <span class="content">${data[i].content}</span>
             </div>`
         );  
     };
@@ -120,30 +125,34 @@ function editEntryData(data) {
         const entryId = $(this).parent().attr("id"); 
         console.log(entryId); 
 
-        const entryTitle = $(".entry-title").val(data.title);
-        const eventType = $(".event-type").val();
-        const entryContent = $(".content").val();
-        const entryDate = $(".date-created").val();
+        const entryTitle = $(this).parent().find(".entry-title").val();
+        const eventType = $(this).parent().find(".date-created").val();
+        const entryContent = $(this).parent().find(".event-type").val();
+        const entryDate = $(this).parent().find(".content").val();
+/* this gets values of updated info. still need to extract existing data. */
 
         console.log(entryTitle);
         console.log(eventType);
         console.log(entryContent);
         console.log(entryDate);
 
-        displayEditEntryForm(entryId);
+        displayEditEntryForm();
     });
 };
 /* will need to return values and pass them all somehow*/
 
 
-function displayEditEntryForm(entryId) {  
+function displayEditEntryForm() {  
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
+    $(".edit-entry-page").removeClass("hidden");
+
+/* entryId is not defined now that I have two separate functions */
     $(".edit-entry-display").html(
         `<form class="edit-entry-form">
             <h2>Edit Entry</h2>
             <input class="edit-entry-title" type="text" placeholder="Entry Title">
-            <input class="edit-entry-id" type="hidden" value="${entryId}">
+            
             <br>
             <label>Event Type</label>
             <br>
@@ -168,6 +177,7 @@ function displayEditEntryForm(entryId) {
         </form>`
     );
 };    
+/*  should go in line 154   <input class="edit-entry-id" type="hidden" value="${entryId}">*/ 
 
 $(document).on("submit",".edit-entry-form", function(event) {
     event.preventDefault();
