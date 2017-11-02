@@ -45,6 +45,15 @@ h1, h2, .nav-logo {
 	color:#f7ce3e;
 }
 
+h2 {
+	font-size: 45px;
+	text-shadow: 2px 2px #0a1612;
+}
+
+.slogan {
+	font-size: 25px;
+}
+
 .new-entry-page, .edit-entry-display {
 	display: block;
 	text-align: center;
@@ -123,14 +132,15 @@ footer {
 	font-weight: bold;
 }
 
+.display-title {
+	font-family: 'Cinzel Decorative', cursive; 
+	color:#f7ce3e;
+	font-size: 20px;
+	text-shadow: 1px 1px #0a1612;
+}
 
 .card {
-    /* width: 100%;
-    height: 100%; */
-    /* position: absolute; */
-    /* top: 0;
-    left: 0; */
-    background: rgba(150, 146, 146, 0.3);
+    background: rgba(90, 88, 88, 0.3);
 	z-index: -1;
 	border-radius: 5px;
 	padding: 10px;
@@ -146,7 +156,12 @@ button {
     border-radius: 5px;
     padding: 12px;
     margin: 5px;
-    font-size: 16px;
+	font-size: 16px;
+	cursor: point;
+}
+
+button:hover {
+	background-color: #0e171b;
 }
 
 .hidden {
