@@ -131,12 +131,12 @@ function editEntryData(data) {
         const entryId = $(this).parent().attr("id"); 
         console.log(entryId); 
 
-        const entryTitle = $(this).siblings(".entry-title").val();
-        const eventType = $(this).siblings(".date-created").val();
-        const entryContent = $(this).siblings(".event-type").val();
-        const entryDate = $(this).siblings(".content").val();
+        const entryTitle = $(this).closest(".entry-title").val();
+        const eventType = $(this).closest(".date-created").val();
+        const entryContent = $(this).closest(".event-type").val();
+        const entryDate = $(this).closest(".content").val();
 /* this gets values of updated info. still need to extract existing data. */
-
+/* keep looking for methods that are a better match for proper traversal*/
         console.log(entryTitle);
         console.log(eventType);
         console.log(entryContent);
