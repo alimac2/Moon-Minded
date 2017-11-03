@@ -5,7 +5,7 @@
 
 function submitEntryData() {  
       /* ---- CLICK EVENTS TO HIDE AND SHOW PAGES --- */
-    $(".nav-link-create").click(function() {
+    $(".nav-link-create").click(function(event) {
         event.preventDefault();
         $(".new-entry-page").removeClass("hidden");
         $(".all-entries-page").addClass("hidden");
@@ -53,7 +53,7 @@ function submitEntryData() {
 
 /*REVIEW THIS CODE - every time the user clicks on the All Entries link, the AJAX GET request runs. This causes the entries to populate every time user clicks on link*/
 function clickGetAndDisplayEntries() {
-    $(".nav-link-all").click(function() {
+    $(".nav-link-all").click(function(event) {
         event.preventDefault();
         $(".all-entries-page").removeClass("hidden");
         $(".new-entry-page").addClass("hidden");
@@ -118,6 +118,12 @@ function displayEntries(data) {
     };
 };
 
+/* 
+- click edit button 
+- grab values from existing entry (entry comes from a div parent with span children)
+-
+*/
+
 function editEntryData(data) {
     $(".all-entries-page").on("click", ".edit-btn", function(event) {
         event.preventDefault();
@@ -125,10 +131,10 @@ function editEntryData(data) {
         const entryId = $(this).parent().attr("id"); 
         console.log(entryId); 
 
-        const entryTitle = $(this).parent().find(".entry-title").val();
-        const eventType = $(this).parent().find(".date-created").val();
-        const entryContent = $(this).parent().find(".event-type").val();
-        const entryDate = $(this).parent().find(".content").val();
+        const entryTitle = $(this).siblings(".entry-title").val();
+        const eventType = $(this).siblings(".date-created").val();
+        const entryContent = $(this).siblings(".event-type").val();
+        const entryDate = $(this).siblings(".content").val();
 /* this gets values of updated info. still need to extract existing data. */
 
         console.log(entryTitle);
@@ -136,7 +142,7 @@ function editEntryData(data) {
         console.log(entryContent);
         console.log(entryDate);
 
-        displayEditEntryForm();
+        // displayEditEntryForm();
     });
 };
 /* will need to return values and pass them all somehow*/
