@@ -154,8 +154,8 @@ function displayEditEntryForm() {
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
     $(".edit-entry-page").removeClass("hidden");
-        
-/* entryId is not defined now that I have two separate functions. Unsure how to get entryId from here */
+    
+    /* entryId is not defined now that I have two separate functions. Unsure how to get entryId from here */
     $(".edit-entry-display").html(
         `<form class="edit-entry-form">
             <h2>Edit Entry</h2>
@@ -210,6 +210,8 @@ $(document).on("submit",".edit-entry-form", function(event) {
 }); 
 /* look at editEntry - same idea for click edit btn*/
 
+
+/* updateEntry.id is no longer defined before it is in the scope of the function above. This used to all be inside 1 function. Need help modularizing my code and tie it together properly*/
 function editEntry(updatedEntry) {  
     $.ajax({
         method: "PUT",
