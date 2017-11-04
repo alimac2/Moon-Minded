@@ -9,6 +9,7 @@ function submitEntryData() {
         event.preventDefault();
         $(".new-entry-page").removeClass("hidden");
         $(".all-entries-page").addClass("hidden");
+        $(".edit-entry-page").addClass("hidden");
         $(".landing-page").addClass("hidden");
     });
     
@@ -27,13 +28,7 @@ function submitEntryData() {
             created: entryDate
         };
         console.log(entryDetails);
-        
-        /* clear out form
-        tried entryDetails.val(""); .empty(LOOK UP)
-        need to try document.getElementById("").reset();
-        $(".class")[0].reset();
-        $(".class").trigger("reset");
-        */
+
         $.ajax({
             method: "POST",
             url: "/entries",
@@ -44,6 +39,7 @@ function submitEntryData() {
                 console.log("POST request works"); /*Display data, call function to display data*/ 
                 $(".new-entry-page").addClass("hidden");
                 $(".all-entries-page").removeClass("hidden");
+                $(".entry-details")[0].reset();
                 getEntriesData();
             }
         });     
@@ -58,6 +54,8 @@ function clickGetAndDisplayEntries() {
         $(".all-entries-page").removeClass("hidden");
         $(".new-entry-page").addClass("hidden");
         $(".landing-page").addClass("hidden");
+        $(".edit-entry-page").addClass("hidden");
+        $(".entry-details")[0].reset(); /*clears new entry form*/
         getEntriesData();
     });
 };
@@ -118,12 +116,6 @@ function displayEntries(data) {
     };
 };
 
-/* 
-- click edit button 
-- grab values from existing entry (entry comes from a div parent with span children)
--
-*/
-
 function editEntryData(data) {
     $(".all-entries-page").on("click", ".edit-btn", function(event) {
         event.preventDefault();
@@ -144,7 +136,6 @@ function editEntryData(data) {
         displayEditEntryForm(entryId, entryTitle, eventType, entryContent, entryDate);
     });
 };
-/* will need to return values and pass them all somehow*/
 
 
 function displayEditEntryForm(id, title, eventType, content, date) { 
@@ -209,10 +200,7 @@ $(document).on("submit",".edit-entry-form", function(event) {
     console.log(updatedEntry);
     editEntry(updatedEntry);
 }); 
-/* look at editEntry - same idea for click edit btn*/
 
-
-/* updateEntry.id is no longer defined before it is in the scope of the function above. This used to all be inside 1 function. Need help modularizing my code and tie it together properly*/
 function editEntry(updatedEntry) {  
     $.ajax({
         method: "PUT",
@@ -249,12 +237,6 @@ function deleteEntry(){
             contentType: "application/json",
             success: function(data) {
                deleteEntry.remove();
-               
-                /*function handleDelete () {
-                 remove deleted item from DOM 
-                 keep existing entries visible on page
-                };*/
-                // getEntriesData(); /*data displays without deleted item, but previous entries remain on page*/
                 console.log("DELETE request works");
             } 
         });
