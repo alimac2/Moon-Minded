@@ -132,24 +132,24 @@ function editEntryData(data) {
         console.log(entryId); 
 
         const entryTitle = $(this).siblings(".entry-title").text();
-        const eventType = $(this).siblings(".date-created").text();
-        const entryContent = $(this).siblings(".event-type").text();
-        const entryDate = $(this).siblings(".content").text();
+        const eventType = $(this).siblings(".event-type").text();
+        const entryContent = $(this).siblings(".content").text();
+        const entryDate = $(this).siblings(".date-created").text();
 
         console.log(entryTitle);
         console.log(eventType);
         console.log(entryContent);
         console.log(entryDate);
 
-        displayEditEntryForm();
+        displayEditEntryForm(entryId, entryTitle, eventType, entryContent, entryDate);
     });
 };
 /* will need to return values and pass them all somehow*/
 
 
-function displayEditEntryForm() {  
-    const entryId = $(".all-entires").attr("id"); 
-    console.log(entryId); /* undefined*/
+function displayEditEntryForm(id, title, eventType, content, date) { 
+    console.log(id, title, eventType, content, date);
+
 
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
@@ -159,8 +159,8 @@ function displayEditEntryForm() {
     $(".edit-entry-display").html(
         `<form class="edit-entry-form">
             <h2>Edit Entry</h2>
-            <input class="edit-entry-title" type="text" placeholder="Entry Title">
-            <input class="edit-entry-id" type="hidden" value="${entryId}">
+            <input class="edit-entry-title" type="text" placeholder="Entry Title" value="${title}">
+            <input class="edit-entry-id" type="hidden" value="${id}">
             <br>
             <label>Event Type</label>
             <br>
@@ -175,15 +175,16 @@ function displayEditEntryForm() {
                     <option value="lunar-eclipse">lunar eclipse</option>
             </select>
             <br>
-            <textarea class="edit-content"></textarea>
+            <textarea class="edit-content">${content}</textarea>
             <br>
             <label>Entry Date and Time</label>
             <br>
-            <input class="edit-date-created" id="datetime" type="datetime-local">
+            <input class="edit-date-created" id="datetime" type="datetime-local" value="${date}">
             <br>
             <button class="save-entry" name="save-btn" type="submit">Save Changes</button>	
         </form>`
     );
+    $(".edit-event-type").val(eventType);
 };    
 
 
