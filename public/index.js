@@ -160,10 +160,10 @@ function displayEditEntryForm(id, title, eventType, content, date) {
                 <option value="stargazing">stargazing</option>
                 <option value="constellations">constellations</option>
                 <option value="meteor-shower">meteor shower</option>
-                <option value="milky-way">milky way</option>
+                <option value="milky way">milky way</option>
                 <option value="planets">planets</option>
-                <option value="solar-eclipse">solar eclipse</option>
-                    <option value="lunar-eclipse">lunar eclipse</option>
+                <option value="solar eclipse">solar eclipse</option>
+                    <option value="lunar eclipse">lunar eclipse</option>
             </select>
             <br>
             <textarea class="edit-content">${content}</textarea>
