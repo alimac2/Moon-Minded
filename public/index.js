@@ -131,34 +131,36 @@ function editEntryData(data) {
         const entryId = $(this).parent().attr("id"); 
         console.log(entryId); 
 
-        const entryTitle = $(this).closest(".entry-title").val();
-        const eventType = $(this).closest(".date-created").val();
-        const entryContent = $(this).closest(".event-type").val();
-        const entryDate = $(this).closest(".content").val();
-/* this gets values of updated info. still need to extract existing data. */
-/* keep looking for methods that are a better match for proper traversal*/
+        const entryTitle = $(this).siblings(".entry-title").text();
+        const eventType = $(this).siblings(".date-created").text();
+        const entryContent = $(this).siblings(".event-type").text();
+        const entryDate = $(this).siblings(".content").text();
+
         console.log(entryTitle);
         console.log(eventType);
         console.log(entryContent);
         console.log(entryDate);
 
-        // displayEditEntryForm();
+        displayEditEntryForm();
     });
 };
 /* will need to return values and pass them all somehow*/
 
 
 function displayEditEntryForm() {  
+    const entryId = $(".all-entires").attr("id"); 
+    console.log(entryId); /* undefined*/
+
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
     $(".edit-entry-page").removeClass("hidden");
-
-/* entryId is not defined now that I have two separate functions */
+        
+/* entryId is not defined now that I have two separate functions. Unsure how to get entryId from here */
     $(".edit-entry-display").html(
         `<form class="edit-entry-form">
             <h2>Edit Entry</h2>
             <input class="edit-entry-title" type="text" placeholder="Entry Title">
-            
+            <input class="edit-entry-id" type="hidden" value="${entryId}">
             <br>
             <label>Event Type</label>
             <br>
@@ -183,7 +185,7 @@ function displayEditEntryForm() {
         </form>`
     );
 };    
-/*  should go in line 154   <input class="edit-entry-id" type="hidden" value="${entryId}">*/ 
+
 
 $(document).on("submit",".edit-entry-form", function(event) {
     event.preventDefault();
