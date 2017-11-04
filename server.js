@@ -21,6 +21,7 @@ mongoose.Promise = global.Promise;
 app.get("/entries", (req, res) => {
     Entry
       .find()
+      .sort({_id: -1})
       .then(entries => {
         res.json(entries.map(entry => entry.apiRepr()));
       })

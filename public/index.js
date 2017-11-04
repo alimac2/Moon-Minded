@@ -238,7 +238,9 @@ function deleteEntry(){
         event.preventDefault();
         
         const entryId = $(this).parent().attr("id"); 
-        console.log(entryId); 
+        console.log(entryId);
+
+        const deleteEntry =  $(this).closest('.entry-display');
 
         $.ajax({
             method: "DELETE",
@@ -246,11 +248,13 @@ function deleteEntry(){
             dataType: "json",
             contentType: "application/json",
             success: function(data) {
+               deleteEntry.remove();
+               
                 /*function handleDelete () {
                  remove deleted item from DOM 
                  keep existing entries visible on page
                 };*/
-                getEntriesData(); /*data displays without deleted item, but previous entries remain on page*/
+                // getEntriesData(); /*data displays without deleted item, but previous entries remain on page*/
                 console.log("DELETE request works");
             } 
         });
