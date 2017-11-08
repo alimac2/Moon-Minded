@@ -160,7 +160,7 @@ function displayEditEntryForm(id, title, eventType, content, date) {
                     <option value="lunar eclipse">lunar eclipse</option>
             </select>
             <br>
-            <textarea class="edit-content">${content}</textarea>
+            <textarea rows="15" class="edit-content">${content}</textarea>
             <br>
             <label>Entry Date and Time</label>
             <br>
