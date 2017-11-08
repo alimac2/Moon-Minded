@@ -1,10 +1,6 @@
 "use strict"
 
-
-/* global variable called state. State is where you start off.  */
-
 function submitEntryData() {  
-      /* ---- CLICK EVENTS TO HIDE AND SHOW PAGES --- */
     $(".nav-link-create").click(function(event) {
         event.preventDefault();
         $(".new-entry-page").removeClass("hidden");
@@ -21,6 +17,8 @@ function submitEntryData() {
         const entryContent = $(".content").val();
         const entryDate = $(".date-created").val();
         
+        console.log(entryDate);
+
         const entryDetails =  {
             title: entryTitle,
             eventType: eventType,
@@ -36,18 +34,16 @@ function submitEntryData() {
             data: JSON.stringify(entryDetails),
             contentType: "application/json", 
             success: function(data) {
-                console.log("POST request works"); /*Display data, call function to display data*/ 
+                console.log("POST request works");
                 $(".new-entry-page").addClass("hidden");
                 $(".all-entries-page").removeClass("hidden");
-                $(".entry-details")[0].reset();
+                $(".entry-details")[0].reset(); /*clears form*/
                 getEntriesData();
             }
         });     
     });
 };
 
-
-/*REVIEW THIS CODE - every time the user clicks on the All Entries link, the AJAX GET request runs. This causes the entries to populate every time user clicks on link*/
 function clickGetAndDisplayEntries() {
     $(".nav-link-all").click(function(event) {
         event.preventDefault();
@@ -67,7 +63,6 @@ function getEntriesData() {
         dataType: "json",
         contentType: "application/json", 
         success: function(data) {
-            // console.log(data);
             displayEntries(data);
             console.log("GET request works");
         }
@@ -83,19 +78,18 @@ function getEntriesDataById() {
         dataType: "json",
         contentType: "application/json", 
         success: function(data) {
-            // console.log(data);
-            
             console.log("GET request works");
         }
     });
 };
 
+/* Displays entries with information added by user to the new entry form*/
 function displayEntries(data) {
     $(".all-entries").empty();
 
     for (let i = 0; i < data.length; i++) {
-    // console.log(data);
-    // console.log(i);
+    /* console.log(data); */
+    /* console.log(i); */
         $(".all-entries-title").removeClass("hidden");
         $(".main-title").addClass("hidden");
         $(".about").addClass("hidden")
@@ -123,30 +117,30 @@ function editEntryData(data) {
         const entryId = $(this).parent().attr("id"); 
         console.log(entryId); 
 
+        /* use .text() method because accessing data from <span> element from DOM not <input> element */
         const entryTitle = $(this).siblings(".entry-title").text();
         const eventType = $(this).siblings(".event-type").text();
         const entryContent = $(this).siblings(".content").text();
         const entryDate = $(this).siblings(".date-created").text();
 
-        console.log(entryTitle);
-        console.log(eventType);
-        console.log(entryContent);
-        console.log(entryDate);
+        // console.log(entryTitle);
+        // console.log(eventType);
+        // console.log(entryContent);
+        // console.log(entryDate);
 
-        displayEditEntryForm(entryId, entryTitle, eventType, entryContent, entryDate);
+        displayEditEntryForm(entryId, entryTitle, eventType, entryContent, entryDate); /* passing all these values to displayEditEntryForm function */
     });
 };
 
 
 function displayEditEntryForm(id, title, eventType, content, date) { 
-    console.log(id, title, eventType, content, date);
-
+    console.log(id, title, eventType, content, date); /*all of these values come from editEntryDate function */
 
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
     $(".edit-entry-page").removeClass("hidden");
     
-    /* entryId is not defined now that I have two separate functions. Unsure how to get entryId from here */
+    /* using embedded expressions to populate data */
     $(".edit-entry-display").html(
         `<form class="edit-entry-form">
             <h2>Edit Entry</h2>
@@ -175,7 +169,7 @@ function displayEditEntryForm(id, title, eventType, content, date) {
             <button class="save-entry" name="save-btn" type="submit">Save Changes</button>	
         </form>`
     );
-    $(".edit-event-type").val(eventType);
+    $(".edit-event-type").val(eventType); /* grabbing value for the <select> element */
 };    
 
 
