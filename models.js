@@ -1,6 +1,7 @@
 "use strict"
 
 const mongoose = require("mongoose");
+const moment = require("moment");
 
 const entrySchema = mongoose.Schema ({
     title: {type: String, required: true},
@@ -9,19 +10,25 @@ const entrySchema = mongoose.Schema ({
     created: { type: Date, default: Date.now }
 });
 
+entrySchema.virtual("formattedDate").get(function() {
+    return moment(this.created).format("MMMM Do YYYY, hh:mm:ss a");
+});
 
-// this is an *instance method* which will be available on all instances
-// of the model. This method will be used to return an object that only
-// exposes *some* of the fields we want from the underlying data  
+/*this is an *instance method* which will be available on all instances
+of the model. This method will be used to return an object that only
+exposes *some* of the fields we want from the underlying data */ 
+
 entrySchema.methods.apiRepr = function() {
     return {
       id: this._id,
       title: this.title,
       eventType: this.eventType,
       content: this.content,
-      created: this.created
+      created: this.formattedDate
     }; 
 }
+
+
 
 const Entry = mongoose.model("Entry", entrySchema);
 

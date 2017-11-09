@@ -26,6 +26,7 @@ function submitEntryData() {
             created: entryDate
         };
         console.log(entryDetails);
+        // console.log(created);
 
         $.ajax({
             method: "POST",
@@ -126,7 +127,7 @@ function editEntryData(data) {
         // console.log(entryTitle);
         // console.log(eventType);
         // console.log(entryContent);
-        // console.log(entryDate);
+        console.log(entryDate);
 
         displayEditEntryForm(entryId, entryTitle, eventType, entryContent, entryDate); /* passing all these values to displayEditEntryForm function */
     });
@@ -170,6 +171,7 @@ function displayEditEntryForm(id, title, eventType, content, date) {
         </form>`
     );
     $(".edit-event-type").val(eventType); /* grabbing value for the <select> element */
+    $(".edit-date-created").val(date);
 };    
 
 
