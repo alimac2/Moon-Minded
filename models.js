@@ -11,8 +11,10 @@ const entrySchema = mongoose.Schema ({
 });
 
 entrySchema.virtual("formattedDate").get(function() {
-    return moment(this.created).format("MMMM Do YYYY, hh:mm:ss a");
+    return moment(this.created).format("MMMM Do YYYY, hh:mm a");
 });
+
+// .toDate()
 
 /*this is an *instance method* which will be available on all instances
 of the model. This method will be used to return an object that only
@@ -24,10 +26,9 @@ entrySchema.methods.apiRepr = function() {
       title: this.title,
       eventType: this.eventType,
       content: this.content,
-      created: this.formattedDate
+      created: this.formattedDate /*maybe this.created */
     }; 
 }
-
 
 
 const Entry = mongoose.model("Entry", entrySchema);
