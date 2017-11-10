@@ -100,7 +100,8 @@ function displayEntries(data) {
                 <br>
                 <span class="date-created">${data[i].created}</span>
                 <br>
-                <span class="event-type">${data[i].eventType}</span>
+                <span class="event-display"><i>On this day I saw</i></span>
+                <span class="event-type event-display"><i>${data[i].eventType}</i></span>
                 <br>
                 <span class="content">${data[i].content}</span>
                 <br>
@@ -148,22 +149,21 @@ function displayEditEntryForm(id, title, eventType, content, date) {
             <input class="edit-entry-title" type="text" placeholder="Entry Title" value="${title}">
             <input class="edit-entry-id" type="hidden" value="${id}">
             <br>
-            <label>Event Type</label>
+            <label>What did you see?</label>
             <br>
             <select class="edit-event-type">
-                <option value="moon">moon</option>
-                <option value="stargazing">stargazing</option>
+                <option value="the moon">the moon</option>
                 <option value="constellations">constellations</option>
-                <option value="meteor-shower">meteor shower</option>
-                <option value="milky way">milky way</option>
+                <option value="a meteor shower">a meteor shower</option>
+                <option value="the milky way">the milky way</option>
                 <option value="planets">planets</option>
-                <option value="solar eclipse">solar eclipse</option>
-                    <option value="lunar eclipse">lunar eclipse</option>
+                <option value="a solar eclipse">a solar eclipse</option>
+                    <option value="a lunar eclipse">a lunar eclipse</option>
             </select>
             <br>
             <textarea rows="15" class="edit-content">${content}</textarea>
             <br>
-            <label>Entry Date and Time</label>
+            <label>When did it happen?</label>
             <br>
             <input class="edit-date-created" id="datetime" type="datetime-local" value="${date}">
             <br>
