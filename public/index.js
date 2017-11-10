@@ -175,6 +175,7 @@ function displayEditEntryForm(id, title, eventType, content, date) {
 };    
 
 /*2017-07-13T10:30*/
+/* moment("YYYY-MM-DD HH:mm") */
 
 
 $(document).on("submit",".edit-entry-form", function(event) {
