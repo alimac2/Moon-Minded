@@ -174,6 +174,8 @@ function displayEditEntryForm(id, title, eventType, content, date) {
     $(".edit-date-created").val(date);
 };    
 
+/*2017-07-13T10:30*/
+
 
 $(document).on("submit",".edit-entry-form", function(event) {
     event.preventDefault();
