@@ -161,10 +161,6 @@ footer {
 	position: fixed;
 }
 
-.about {
-	color: white;
-}
-
 .by {
 	color: 	#c5c1c0;
 	margin: 4px;
@@ -173,8 +169,10 @@ footer {
 .about {
 	text-align: center;
 	padding-top: 60px;
-	text-shadow: 1px 1px #0a1612;
+	text-shadow: 2px 2px #0a1612;
 	font-weight: bold;
+	color: white;
+	line-height: 150%;
 }
 
 .display-title {
