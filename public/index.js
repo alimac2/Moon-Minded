@@ -128,7 +128,7 @@ function editEntryData(data) {
         // console.log(entryTitle);
         // console.log(eventType);
         // console.log(entryContent);
-        console.log(entryDate);
+        // console.log(entryDate);
 
         displayEditEntryForm(entryId, entryTitle, eventType, entryContent, entryDate); /* passing all these values to displayEditEntryForm function */
     });
@@ -136,7 +136,7 @@ function editEntryData(data) {
 
 
 function displayEditEntryForm(id, title, eventType, content, date) { 
-    console.log(id, title, eventType, content, date); /*all of these values come from editEntryDate function */
+    // console.log(id, title, eventType, content, date); /*all of these values come from editEntryDate function */
 
     $(".all-entries-page").addClass("hidden");
     $(".new-entry-page").addClass("hidden");
@@ -165,7 +165,7 @@ function displayEditEntryForm(id, title, eventType, content, date) {
             <br>
             <label>When did it happen?</label>
             <br>
-            <input class="edit-date-created" id="datetime" type="datetime-local" value="${date}">
+            <input class="edit-date-created" id="datetime" type="text" value="${date}">
             <br>
             <button class="save-entry" name="save-btn" type="submit">Save Changes</button>	
         </form>`
@@ -197,7 +197,7 @@ $(document).on("submit",".edit-entry-form", function(event) {
         created: entryDate
     };
     console.log(updatedEntry);
-    editEntry(updatedEntry);
+    // editEntry(updatedEntry);
 }); 
 
 function editEntry(updatedEntry) {  
@@ -215,6 +215,7 @@ function editEntry(updatedEntry) {
         },
         error: function (textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
+            console.log(updatedEntry);
         }
     });
 };

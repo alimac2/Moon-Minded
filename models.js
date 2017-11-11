@@ -7,7 +7,7 @@ const entrySchema = mongoose.Schema ({
     title: {type: String, required: true},
     eventType: String,
     content: {type: String}, 
-    created: { type: Date, default: Date.now }
+    created: {type: String}
 });
 
 entrySchema.virtual("formattedDate").get(function() {
