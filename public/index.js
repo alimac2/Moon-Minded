@@ -210,6 +210,7 @@ function editEntry(updatedEntry) {
         success: function(data)  {
             console.log("PUT request works");
             console.log(data);
+            console.log("SUCCESS updatedEntry")
             getEntriesData();
             /* should take user back to all-entries page with updated entry */
         },
