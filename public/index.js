@@ -197,7 +197,7 @@ $(document).on("submit",".edit-entry-form", function(event) {
         created: entryDate
     };
     console.log(updatedEntry);
-    // editEntry(updatedEntry);
+    editEntry(updatedEntry);
 }); 
 
 function editEntry(updatedEntry) {  
