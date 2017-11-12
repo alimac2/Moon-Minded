@@ -163,10 +163,7 @@ function displayEditEntryForm(id, title, eventType, content, date) {
             <br>
             <textarea rows="15" class="edit-content">${content}</textarea>
             <br>
-            <label>When did it happen?</label>
-            <br>
-            <input class="edit-date-created" id="datetime" type="text" value="${date}">
-            <br>
+
             <button class="save-entry" name="save-btn" type="submit">Save Changes</button>	
         </form>`
     );
@@ -175,8 +172,14 @@ function displayEditEntryForm(id, title, eventType, content, date) {
 };    
 
 /*2017-07-13T10:30*/
+
 /* moment("YYYY-MM-DD HH:mm") */
 
+/*  <label>When did it happen?</label>
+    <br>
+    <input class="edit-date-created" id="datetime" type="text" value="${date}">
+    <br>
+*/
 
 $(document).on("submit",".edit-entry-form", function(event) {
     event.preventDefault();

@@ -12,6 +12,7 @@ const entrySchema = mongoose.Schema ({
 
 entrySchema.virtual("formattedDate").get(function() {
     return moment(this.created).format("MMMM Do YYYY, hh:mm a");
+    // return this.created;
 });
 
 /*this is an *instance method* which will be available on all instances
