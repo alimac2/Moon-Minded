@@ -13,7 +13,6 @@ body {
 	background: black;
 	background-image: url(nathan-anderson-131022.jpg);
     background-size: cover;
-    /* background-attachment: fixed; */
     background-position: center;
 }
 
@@ -23,7 +22,6 @@ main {
 	height: 100%;
 	background-image: url(stas-ovsky-359846.jpg);
     background-size: cover;
-    /* background-attachment: fixed; */
     background-position: center;
 }
 
@@ -111,6 +109,11 @@ textarea {
 input {
 	width: 100%;
 	margin-bottom: 15px;
+	margin-top: 5px;
+}
+
+select {
+	margin-top: 5px;
 }
 
 .entry-title, .edit-entry-title {
@@ -125,11 +128,11 @@ input {
 	display: block;
 	padding: 8px;
 	text-decoration: none;
-	color:#c5c1c0;
+	color: white;
 }
 
 a:hover {
-	color: white;
+	color: #c5c1c0;
 }
 
 .nav-logo {
@@ -145,6 +148,7 @@ a:hover {
 	text-align: center;
 	color: white;
 	text-shadow: 1px 1px #0a1612;
+	margin-top: 30px;
 
 }
 
@@ -183,7 +187,7 @@ footer {
 }
 
 .card {
-    background: rgba(90, 88, 88, 0.3);
+    background: rgba(90, 88, 88, 0.5);
 	z-index: -1;
 	border-radius: 5px;
 	padding: 10px;
@@ -199,9 +203,11 @@ button {
     color: #f7ce3e;;
     border-radius: 5px;
     padding: 12px;
-    margin: 5px;
+	margin-top: 12px;
+	margin-left: 8px;
 	font-size: 16px;
-	cursor: point;
+	letter-spacing: 2px;
+	cursor: url(http://www.funpaperairplanes.com/img/fpa-logo.png), pointer;
 }
 
 button:hover {
@@ -214,10 +220,6 @@ button:hover {
 
 
 @media only screen and (max-width: 500px) {
-	
-	/* .navb a {
-		display: block;
-	} */
 
 	.card {
 		width: 90%;
@@ -225,5 +227,22 @@ button:hover {
 		margin-left: auto;
 		margin-right: auto;
 	}
+}
 
+@media only screen and (min-width: 980px) {
+	.about {
+		font-size: 23px;
+	}
+
+	.entry-display {
+		font-size: 20px;
+	}
+
+	.display-title {
+		font-size: 25px;
+	}
+
+	label, input, select, .entry-title, .edit-entry-title {
+		font-size: 20px;
+	}
 }
